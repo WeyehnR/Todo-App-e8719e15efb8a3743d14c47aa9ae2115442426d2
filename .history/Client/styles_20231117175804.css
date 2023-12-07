@@ -1,0 +1,92 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 20px;
+}
+
+.menu-container {
+    position: fixed; /* Fixed position to stay in place during scroll */
+    width: 250px; /* Width of the menu */
+    height: 100vh; /* Full height of the viewport */
+    background-color: #ffffff; /* White background */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+    z-index: 1000; /* High z-index to stay on top */
+    transition: transform 0.3s ease-in-out; /* Smooth transition for opening/closing */
+    transform: translateX(-250px); /* Start off-screen */
+}
+
+.menu-container.expanded {
+    transform: translateX(0); /* Move into view when expanded */
+}
+
+/* Style for the hamburger icon */
+.hamburger {
+    font-size: 24px; /* Size of the hamburger icon */
+    cursor: pointer; /* Pointer cursor on hover */
+    padding: 20px; /* Padding around the icon */
+    border-bottom: 1px solid #ebebeb; /* Separator */
+}
+
+/* Style for the menu title */
+.menu-title {
+    font-size: 24px; /* Size of the menu title */
+    font-weight: bold; /* Bold font for the title */
+    padding: 20px; /* Padding around the title */
+    border-bottom: 1px solid #ebebeb; /* Separator */
+}
+
+/* Style for the search input */
+.menu-search {
+    width: calc(100% - 40px); /* Full width minus padding */
+    padding: 10px 20px; /* Padding for the input */
+    border: none; /* No border */
+    border-bottom: 1px solid #ebebeb; /* Separator */
+}
+
+/* Style for menu sections */
+.menu-section {
+    list-style: none; /* Remove list bullets */
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
+}
+
+.menu-item {
+    padding: 10px 20px; /* Padding for list items */
+    display: flex; /* Flexbox for alignment */
+    align-items: center; /* Align items vertically */
+    border-bottom: 1px solid #ebebeb; /* Separator */
+    cursor: pointer; /* Pointer cursor on hover */
+}
+
+.menu-item .icon {
+    margin-right: 10px; /* Space between icon and text */
+}
+
+.menu-item .item-count {
+    margin-left: auto; /* Push to the right of the flex container */
+    background-color: #f0f0f0; /* Background color for the count */
+    padding: 2px 6px; /* Padding around the count */
+    border-radius: 12px; /* Rounded corners for the count */
+    font-size: 12px; /* Smaller font size for the count */
+}
+
+/* Style for the bottom section */
+.menu-bottom {
+    position: absolute; /* Absolute positioning */
+    bottom: 0; /* Stick to the bottom */
+    width: 100%; /* Full width */
+}
+
+.menu-button {
+    width: 100%; /* Full width buttons */
+    padding: 20px; /* Padding for buttons */
+    text-align: left; /* Align text to the left */
+    border: none; /* No border */
+    background-color: transparent; /* Transparent background */
+    cursor: pointer; /* Pointer cursor on hover */
+}
+
+.menu-button:hover {
+    background-color: #f5f5f5; /* Background color on hover */
+}

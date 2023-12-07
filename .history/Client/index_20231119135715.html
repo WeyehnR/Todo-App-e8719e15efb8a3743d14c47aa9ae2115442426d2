@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List Application</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="menu-container">
+        <div class="hamburger" id="ham-menu-toggle"></div>
+        <div class="menu-card" id="menu-card">
+            <h1 class="menu-title">Menu</h1>
+            <!-- Content of the expanded gray card goes here -->
+            <!-- Search Bar -->
+            <div class="menu-search">
+                <div class="search-container">
+                    <button class="search-icon"></button>
+                    <input type="text" placeholder="Search" class="search-input" />
+                  </div>
+            </div>
+            <!-- Tasks Section -->
+            <!-- Add a 'Tasks' Title -->
+            <h3 class="tasks-menu-title">Tasks</h2>
+            <ul class="Tasks-menu-selection">
+                <li class="upcoming-menu-item"><span class="icon upcoming-icon"></span>Upcoming <span class="upcoming-item-count"></span></li>
+                <li class="today-menu-item"><span class="icon today-icon"></span>Today <span class="today-item-count"></span></li>
+                <li class="calend-menu-item"><span class="icon today-icon"></span>Today <span class="today-item-count"></span></li>
+                <li class="today-menu-item"><span class="icon today-icon"></span>Today <span class="today-item-count"></span></li>
+                <!-- More items... -->
+            </ul>
+            <!-- Lists Section -->
+            <ul class="Lists-menu-section">
+                <li class="menu-item"><span class="icon personal-icon"></span>Personal <span class="item-count">3</span></li>
+                <li class="menu-item"><span class="icon work-icon"></span>Work <span class="item-count">6</span></li>
+                <!-- More items... -->
+            </ul>
+            <!-- Tags Section -->
+            <ul class="menu-section">
+                <li class="menu-item">Tag 1</li>
+                <li class="menu-item">Tag 2</li>
+                <li class="menu-item add-tag">+ Add Tag</li>
+            </ul>
+            <!-- Settings & Sign Out -->
+            <div class="menu-bottom">
+                <button class="menu-button">Settings</button>
+                <button class="menu-button">Sign out</button>
+            </div>
+        </div>
+    </div>
+    <div class="todo-container">
+        <div class="date-header">
+          <h1>Today <span id="dayOfMonth"></span></h1>
+        </div>
+        <div class="add-task">
+            <input type="text" placeholder="Add New Task" id="new-task-input">
+            <button id="add-task-btn">+</button>
+        </div>
+        <ul class="todo-list">
+            <li><input type="checkbox" id="task-1"><label for="task-1">Research content ideas</label></li>
+            <li><input type="checkbox" id="task-2"><label for="task-2">Create a database of guest authors</label></li>
+            <li><input type="checkbox" id="task-3"><label for="task-3">Renew driver's license</label></li>
+            <li><input type="checkbox" id="task-4"><label for="task-4">Consult accountant</label></li>
+            <li><input type="checkbox" id="task-5"><label for="task-5">Print business card</label></li>
+        </ul>
+    </div>
+    <div class="menu-card" id="menu-card">
+        <!-- Content of the expanded gray card goes here -->
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>

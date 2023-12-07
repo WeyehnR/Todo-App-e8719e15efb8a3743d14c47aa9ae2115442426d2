@@ -1,0 +1,125 @@
+/* General styles */
+body {
+    font-family: Arial, sans-serif;
+  }
+  
+  .container {
+    display: flex;
+  }
+  
+  /* Sidebar styles */
+  .sidebar {
+    /* Styles for the full-width sidebar */
+    width: 250px; /* example width */
+    transition: width 0.3s ease;
+  }
+  
+  .sidebar.collapsed {
+    /* Styles for the collapsed sidebar */
+    width: 50px; /* example collapsed width */
+  }
+  
+  /* Content styles */
+  .content {
+    flex-grow: 1;
+  }
+  
+  /* Header styles */
+  header {
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+  }
+  
+  .menu-icon {
+    cursor: pointer;
+    font-size: 35px;
+    padding-right: 20px;
+    padding-top: 10px;
+  }
+
+  .main_title {
+  color: #212529;
+  font-size: 48px;
+  font-family: "Lexend Deca";
+  font-weight: 600;
+  letter-spacing: -1px;
+  line-height: 56px;
+}
+
+  
+/* Add New Task button styling */
+/* General Reset */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4; /*Assuming a light gray background*/
+  }
+  
+  /* Container for task section */
+  .task-section {
+    padding: 20px;
+    background-color: #ffffff; /* Assuming a white background for the task section */
+    border-radius: 5px; /* Optional: if you want rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: for a subtle shadow */
+    margin: 20px; /* Space around the task section */
+  }
+  
+  /* Styles for the add task input and button container */
+  .add-task-container {
+    display: flex;
+    align-items: center;
+    background-color: #fff; /* Matching the task section background */
+    padding: 10px;
+    border-bottom: 1px solid #e1e1e1; /* A subtle bottom border */
+  }
+  
+  /* Styles for the input field */
+  .new-task-input {
+    flex-grow: 1;
+    padding: 12px 9px;
+    padding-top: ;
+    font-size: 16px;
+    border: 2px solid #fff; /* A border that stands out more than the bottom line */
+    border-radius: 6px;
+    margin-right: 12px; /* Space between input and button */
+  }
+  
+  .new-task-input::placeholder {
+    color: #888; /* Placeholder text color */
+  }
+  
+  /* Styles for the add task button */
+  .add-task-button {
+    padding: 10px 25px;
+    border: none;
+    background-color: #fff;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.2s; /* Smooth transition for hover effect */
+  }
+  
+  /* Hover state for the button */
+  .add-task-button:hover, .add-task-button:focus {
+    background-color: #e2e6ea; /* A slightly darker shade on hover */
+  }
+  
+  /* Icon styling */
+  .icon {
+    color: #7c7c7c; /* Icon color */
+    font-size: 24px; /* Adjusted size for visibility */
+    display: inline-block; /* To apply dimensions and vertical alignment */
+    line-height: 1; /* Aligns the icon nicely with text */
+    vertical-align: middle; /* Middle align with the text */
+    margin: -2px 5px 0; /* Adjusted for optical alignment of the icon */
+  }
+  
+  /* Add additional styles as needed */
+.task{
+    border-radius: 15px;
+}  

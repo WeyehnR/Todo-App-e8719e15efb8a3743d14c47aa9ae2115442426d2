@@ -1,0 +1,185 @@
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: whitesmoke;
+    margin: 0;
+    padding: 20px;
+}
+
+.todo-container {
+    top: 120px;
+    left: 80px;
+    right: auto;
+    width: 1038px;
+    height: 356px;
+    background-color: rgba(250,250,250,0);
+    border-radius: 8px;
+    border: 2px solid #ebebeb;
+    box-sizing: border-box;
+    padding: 10px;
+    flex-grow: 1;
+    transition: margin-left 0.3s ease; /* Add a transition for smooth shifting */
+}
+
+/* Shift the todo-container when the menu card is expanded */
+.todo-container.expanded {
+    margin-left: 320px; /* Match the width of the menu card */
+    top: 120px;
+}
+
+#dayOfMonth {
+    border: 1px solid #838181;
+    border-radius: 8px;
+    padding: 5px;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+}
+/* Style for the hamburger icon */
+.hamburger {
+    position:absolute;
+    font-size: 24px; /* Adjust the size as needed */
+    top: 40px; /* Adjust the top position for the icon */
+    left: 25px; /* Adjust the left position for the icon */
+    cursor: pointer;
+    font-family: 'Lexend Deca';
+    z-index: 2;
+}
+
+.hamburger.expanded {
+    top: 40px; /* Align with the top of the expanded menu card */
+    left: 280px; /* Align with the left of the expanded menu card */
+}
+
+
+.menu-container{
+    display: flex;
+}
+
+/* Style for the gray menu card */
+.menu-card {
+    width: 0; /* Initially hidden */
+    height: 100%;
+    overflow: hidden;
+    transition: width 0.3s ease; /* Add a transition for smooth expansion */
+    z-index: 1; /* Ensure the menu card is above other content */
+}
+
+/* Style for the content within the menu card */
+.menu-card-content {
+    padding: 20px;
+    /* Add additional styling as needed for the expanded card content */
+}
+
+/* Adjust the width when the menu card is expanded */
+.menu-card.expanded {
+    width: 300px; /* Adjust the width as desired */
+    background-color: darkgray; /* Adjust the text color as desired */
+    top: 24px;
+    left: 24px;
+    height: 852px;
+    border-radius: 16px;
+}
+
+
+
+.header h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.header span {
+    color: #888;
+}
+
+.add-task input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+}
+
+.todo-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.todo-list li {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    align-items: center;
+}
+
+.todo-list li:last-child {
+    border-bottom: none;
+}
+
+input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+/* You can add more styles for checked tasks or interactive states */
+
+/* ... other styles ... */
+
+.add-task {
+    display: flex;
+    align-items: center;
+    position: relative; /* Add this line */
+}
+
+.add-task input[type="text"] {
+    top: 120px;
+    left: 378px;
+    width: 1038px;
+    height: 48px;
+    background-color: rgba(250,250,250,0);
+    border-radius: 8px;
+    border: 1px solid #ebebeb;
+    box-sizing: border-box;
+    flex-grow: 1;
+    padding: 10px;
+    padding-left: 60px; /* Add space for the button */
+    margin-right: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    font-family: 'Lexend Deca';
+}
+
+
+.add-task button {
+    position: absolute; /* Add this line */
+    left: 10px; /* Adjust as needed */
+    top: 35%;
+    transform: translateY(-50%); /* This centers the button vertically */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1px 15px;
+    border: none;
+    border-radius: 50%; /* This creates the round shape for the button */
+    background-color: rgb(255, 255, 255); /* Replace with the desired button color */
+    color: gray;
+    font-size: 25px;
+    cursor: pointer;
+    font-family: 'Lexend Deca';
+}
+
+/* ... rest of the styles ... */
+
+/* Styles to ensure the input and button are aligned properly */
+.add-task input[type="text"], .add-task button {
+    
+    line-height: 40px; /* Adjust line height to vertically center the text */
+}
+
+/* Adding some interactivity to the button */
+.add-task button:hover {
+    background-color: rgb(185, 181, 181); /* Darker shade when hovering */
+}
+
+/* ... additional styles and responsive adjustments ... */

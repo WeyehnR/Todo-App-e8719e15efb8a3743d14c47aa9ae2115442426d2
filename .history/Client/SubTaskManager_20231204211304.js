@@ -1,0 +1,59 @@
+import DOMHelper from './DOMHelper.js';
+import Subtask from './Subtask.js';
+
+export default class SubTaskManager {
+
+    constructor(task, domHelper) {
+        this.task = task;
+        this.domHelper = domHelper;
+        this.subtasks = this.task._subtasks || [];
+        this.subtaskCount = this.subtasks.length;
+        this.isInitialized = false;
+    }
+
+    init() {
+        // Get references to the add button and the input field
+        const addSubtaskBtn = document.getElementById('add-subtask-btn');
+        const newSubtaskInput = document.getElementById('new-subtask-input');
+
+        // Set up a click event listener on the add button
+        addSubtaskBtn.addEventListener('click', () => {
+            // Get the text from the input field
+            const subtaskName = newSubtaskInput.value;
+
+            // Check if the subtaskName is not empty
+            if (subtaskName.trim() !== '') {
+                // Create a new subtask with the text
+                const subtask = new Subtask(subtaskName);
+
+                // Add the subtask to the subtask list
+                this.addSubtask(subtask);
+
+                // Update the DOM to display the new subtask
+                const subtaskListItem = document.createElement('li');
+                subtaskListItem.textContent = subtaskName;
+                document.getElementById('subtask-list').appendChild(subtaskListItem);
+            }
+
+            // Clear the input field
+            newSubtaskInput.value = '';
+        });
+
+        // Set isInitialized to true
+        this.isInitialized = true;
+    }
+
+    addSubtask(subtask) {
+        // Add the subtask to the task's _subtasks array
+        this.task._subtasks.push(subtask);
+
+        // Update the subtask count
+        this.subtaskCount = this.task._subtasks.length;
+
+        // Convert the task to a JSON string
+        const taskJson = JSON.stringify(this.task);
+
+        // Save the JSON string to local storage
+        localStorage.setItem(`task-${this.task._id}`, taskJson);
+    }
+}

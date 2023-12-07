@@ -1,0 +1,124 @@
+body, html {
+    font-family: 'Lexend Deca';
+    background-color: #fafafa;
+    margin: 0;
+    padding: 0;
+    height: 101%;
+}
+
+.todo-container {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 20px;
+    left: 80px;
+    right: 80px;
+    width: 95%;
+    min-height: 420px;
+    background-color: #fafafa; /* Changed to hex code for consistency */
+    border: 2px solid #ebebeb;
+    border-radius: 8px;
+    padding: 0px 45px 25px;
+    box-sizing: border-box;
+    transition: margin-left 0.3s ease, width 0.3s ease;
+}
+
+.todo-container.expanded {
+    margin-left: 300px;
+    width: calc(100% - 300px - 80px);
+}
+
+.hidden {
+    display: none;
+}
+
+.todo-list, .Tasks-menu-selection, .Lists-menu-selection, .Tags-menu-selection {
+    position: relative;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.arrow-btn {
+    position: absolute;
+    right: 0;
+    background-image: url('icons/Icon right arrow.svg');
+    background-color: #fafafa;
+    border: 1px solid #fafafa;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+}
+
+.todo-list li, .Tasks-menu-selection li, .Lists-menu-selection li, .Tags-menu-selection li {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    font-size: x-large;
+}
+
+.todo-list li:last-child, .Tasks-menu-selection li:last-child, .Lists-menu-selection li:last-child, .Tags-menu-selection li:last-child {
+    border-bottom: none;
+}
+
+/* Merged redundant properties */
+.search-container, .search-icon, .search-input, .icon-svg img, .menu-item, .tag1, .tag2, .settings, .signout, .add-task-container {
+    /* Add your CSS properties here */
+}
+    /* common properties */
+}
+
+/* Removed redundant .menu-item:hover and .tag:hover rules */
+.menu-item:hover, .tag:hover {
+    background-color: rgba(221,221,221,0.5);
+    border-radius: 10px;
+    font-weight: bolder;
+}
+
+/* Merged repetitive pseudo-element styles */
+.personal::before, .work::before {
+    content: "";
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.personal::before {
+    background-color: blue;
+    border-radius: 20%;
+}
+
+.work::before {
+    background-color: red;
+    border-radius: 20%;
+}
+
+/* Merged add-list and add-tag styles */
+.add-list, .add-tag {
+    cursor: pointer;
+    padding-left: 5px;
+}
+
+/* Simplified and merged hover styles */
+.add-list:hover, .add-tag:hover, .settings:hover, .signout:hover {
+    background-color: rgba(221,221,221,0.5);
+    border-radius: 10px;
+    font-weight: bolder;
+}
+
+/* Merged input[type="text"] styles */
+.add-task-container input[type="text"], .search-input {
+    width: 100%;
+    height: 48px;
+    background-color: #fafafa;
+    border-radius: 8px;
+    border: 1px solid #ebebeb;
+    box-sizing: border-box;
+    font-family: 'Lexend Deca';
+    font-size: x-large;
+}
+
+/* Additional styling for specific elements as required */

@@ -1,0 +1,209 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca&display=swap');
+
+:root {
+    --color-gray: #f4f4f4;
+    --color-white: #ffffff;
+    --color-dark-gray: #444444;
+    --color-light-gray: #e1e1e1;
+    --color-black: #090909;
+    --sidebar-width: 15.625rem;
+    --sidebar-collapsed-width: 3.125rem;
+    --gray-card-width: 20.625rem;
+    --gray-card-height: 53.25rem;
+}
+
+*, body {
+    box-sizing: border-box;
+    font-family: 'Lexend Deca', sans-serif;
+}
+
+body {
+    background-color: var(--color-gray);
+}
+
+.container, .add-task-container {
+    display: flex;
+    align-items: center;
+}
+
+.sidebar {
+    position:relative;
+    width: 80px;
+    transition: width 0.3s ease;
+}
+
+.sidebar.collapsed {
+    width: var(--sidebar-collapsed-width);
+}
+
+
+.sidebar.expanded .today-date,
+.sidebar.expanded .add-task-ui {
+    transform: translateX(var(--gray-card-width));
+}
+
+.content.expanded {
+    transform: translateX(250px);
+    transition: transform 0.3s ease;
+}
+
+.content, .new-task-input {
+    flex-grow: 1;
+}
+
+header {
+    padding: 1.25rem;
+}
+
+.ham-menu-icon {
+    color: #7c7c7c;
+    fill: #7c7c7c;
+    font-size: 40px;
+    top: 100px;
+    left: 318px;
+    margin-left: 1.25rem;
+    margin-top: -3.25rem;
+    width: 40px;
+    height: 50px;
+    cursor: pointer;
+}
+
+.menu-heading  {
+    color: #444444;
+    font-size: 24px;
+    font-family: "Lexend Deca";
+    font-weight: 600;
+    line-height: 32px;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    padding-left: 1.25rem;
+} 
+
+.header {
+    display: flex;
+    align-items: center;
+}
+
+
+.Today {
+    color: #212529;
+    font-size: 48px;
+    font-family: "Lexend Deca";
+    font-weight: 600;
+    letter-spacing: -1px;
+    line-height: 56px;
+}
+
+.day_number {
+    cursor: pointer;
+    top: 24px;
+    left: 555px;
+    width: 56px;
+    height: 56px;
+    padding: 0px 8px;
+    border: 1px solid #ebebeb;
+    box-sizing: border-box;
+    border-radius: 8px;
+    background-color: rgba(221,221,221,0);
+    color: #212529;
+    font-size: 40px;
+    font-family: "Lexend Deca";
+    line-height: 48px;
+    outline: none;
+}
+
+.task-section {
+    padding: 1.25rem;
+    background-color: var(--color-white);
+    border-radius: 0.3125rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+    margin: 1.25rem;
+}
+
+.add-task-container {
+    background-color: var(--color-white);
+    padding: 0.1875rem;
+    margin-right: 1.25rem;
+    margin-left: 1.25rem;
+    border-radius: 0.375rem;
+    border-bottom: 1px solid var(--color-light-gray);
+}
+
+.new-task-input {
+    padding: 0.75rem 0.5625rem;
+    font-size: 1rem;
+    border: 2px solid var(--color-white);
+    border-radius: 0.375rem;
+    margin-right: 0.75rem;
+}
+
+.new-task-input::placeholder {
+    color: #888;
+}
+
+.add-task-button {
+    padding: 0.625rem 1.5625rem;
+    border: none;
+    background-color: var(--color-white);
+    cursor: pointer;
+    border-radius: 0.25rem;
+    transition: background-color 0.2s;
+    
+}
+
+.add-task-button:hover, .add-task-button:focus {
+    background-color: #e2e6ea;
+}
+
+.icon {
+    color: #7c7c7c;
+    font-size: 1.5rem;
+    line-height: 1;
+    vertical-align: middle;
+    margin: -0.125rem 0.3125rem 0;
+}
+
+.gray-card {
+    position: absolute;
+    width: var(--gray-card-width);
+    height: var(--gray-card-height);
+    margin-top: -1.55rem;
+    background-color: var(--color-light-gray);
+    border-radius: 1rem;
+    padding: 0.625rem;
+    transition: transform 0.3s ease;
+    transform: translateX(calc(-1 * var(--gray-card-width)));
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.sidebar.expanded .gray-card {
+    transform: translateX(0);
+}
+
+.sidebar.expanded .content {
+    transform: translateX(var(--gray-card-width));
+    transition: transform 0.3s ease;
+}
+
+.sidebar:not(.expanded) .gray-card {
+    transform: translateX(-350px);
+    transition: transform 0.3s ease;
+}
+
+.sidebar .ham-menu-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+}
+
+.sidebar.expanded .ham-menu-icon {
+    right: 10px; /* Adjust this value to position the hamburger menu correctly when the gray card is expanded */
+}
+
+.task {
+    border-radius: 0.9375rem;
+}

@@ -1,0 +1,113 @@
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+.todo-container {
+    background-color: #fff;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+    display: flex;
+    align-items: center;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.header span {
+    color: #888;
+}
+
+.add-task input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+}
+
+.todo-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.todo-list li {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    align-items: center;
+}
+
+.todo-list li:last-child {
+    border-bottom: none;
+}
+
+input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+/* You can add more styles for checked tasks or interactive states */
+
+/* ... other styles ... */
+
+.add-task {
+    display: flex;
+    align-items: center;
+    position: relative; /* Add this line */
+}
+
+.add-task input[type="text"] {
+    flex-grow: 1;
+    padding: 10px;
+    padding-left: 60px; /* Add space for the button */
+    margin-right: 10px;
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    font-family: 'Lexend Deca', sans-serif;
+}
+
+
+.add-task button {
+    position: absolute; /* Add this line */
+    left: 10px; /* Adjust as needed */
+    top: 33%;
+    transform: translateY(-50%); /* This centers the button vertically */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 50%; /* This creates the round shape for the button */
+    background-color: white; /* Replace with the desired button color */
+    color: gray;
+    font-size: 15px;
+    cursor: pointer;
+    font-family: 'Lexend Deca', sans-serif;
+}
+
+/* ... rest of the styles ... */
+
+/* Styles to ensure the input and button are aligned properly */
+.add-task input[type="text"], .add-task button {
+    height: 40px; /* Adjust the height as necessary */
+    line-height: 40px; /* Adjust line height to vertically center the text */
+}
+
+/* Adding some interactivity to the button */
+.add-task button:hover {
+    background-color: rgb(185, 181, 181); /* Darker shade when hovering */
+}
+
+/* ... additional styles and responsive adjustments ... */

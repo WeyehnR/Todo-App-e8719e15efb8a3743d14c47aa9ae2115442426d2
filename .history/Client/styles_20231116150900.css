@@ -1,0 +1,152 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca&display=swap');
+
+:root {
+    --color-gray: #f4f4f4;
+    --color-white: #ffffff;
+    --color-dark-gray: #444444;
+    --color-light-gray: #e1e1e1;
+    --color-black: #090909;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--color-gray);
+}
+
+.container {
+    display: flex;
+}
+
+.sidebar {
+    width: 250px;
+    transition: width 0.3s ease;
+}
+
+.sidebar.collapsed {
+    width: 50px;
+}
+
+.content {
+    flex-grow: 1;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.menu-icon, .menu-heading {
+    cursor: pointer;
+    color: var(--color-dark-gray);
+    font-family: "Lexend Deca";
+    font-weight: 600;
+}
+
+.menu-icon {
+    font-size: 25px;
+    padding-right: 20px;
+}
+
+.menu-heading {
+    font-size: 24px;
+    line-height: 32px;
+    padding-left: 20px;
+}
+
+.main_title {
+    color: #212529;
+    font-size: 48px;
+    font-family: 'Lexend Deca', sans-serif;
+    font-weight: 600;
+    letter-spacing: -1px;
+    line-height: 56px;
+    margin-top: 10px;
+}
+
+.date {
+    border: 1px solid var(--color-black);
+    border-radius: 5px;
+    padding: 0 15px;
+}
+
+.task-section {
+    padding: 20px;
+    background-color: var(--color-white);
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+}
+
+.add-task-container {
+    display: flex;
+    align-items: center;
+    background-color: var(--color-white);
+    padding: 3px;
+    margin-top: 40px;
+    margin-right: 20px;
+    border-radius: 6px;
+    border-bottom: 1px solid var(--color-light-gray);
+}
+
+.new-task-input {
+    flex-grow: 1;
+    padding: 12px 9px;
+    font-size: 16px;
+    border: 2px solid var(--color-white);
+    border-radius: 6px;
+    margin-right: 12px;
+}
+
+.new-task-input::placeholder {
+    color: #888;
+}
+
+.add-task-button {
+    padding: 10px 25px;
+    border: none;
+    background-color: var(--color-white);
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.add-task-button:hover, .add-task-button:focus {
+    background-color: #e2e6ea;
+}
+
+.icon {
+    color: #7c7c7c;
+    font-size: 24px;
+    display: inline-block;
+    line-height: 1;
+    vertical-align: middle;
+    margin: -2px 5px 0;
+}
+
+.gray-card {
+    position: absolute;
+    top: 24px;
+    right: -330px;
+    width: 330px;
+    height: 852px;
+    background-color: var(--color-gray);
+    border-radius: 16px;
+    transition: right 0.3s ease;
+    z-index: 2;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding: 10px;
+}
+
+.sidebar.expanded .gray-card {
+    right: 0;
+}
+
+.task {
+    border-radius: 15px;
+}

@@ -1,0 +1,16 @@
+.todo-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-top: 23px;
+    flex: 1;
+    min-height: 60vh; /* Adjust this value as needed */
+    background-color: rgba(250,250,250,1);
+    border: 2px solid #ebebeb;
+    border-radius: 8px;
+    padding: 10px 45px 25px;
+    box-sizing: border-box;
+    transition: margin-left 0.3s ease;
+    margin-left: 5%; /* Adjust this value as needed */
+    margin-right: 5%; /* Adjust this value as needed */
+}

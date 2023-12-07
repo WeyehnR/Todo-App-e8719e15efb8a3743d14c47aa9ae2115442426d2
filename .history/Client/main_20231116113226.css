@@ -1,0 +1,28 @@
+.screen {
+    background-color: #ffffff;
+}
+
+.card {
+    top: 0px;
+    left: 0px;
+    width: 88px;
+    height: 900px;
+    background-color: #f0f0f0;
+}
+
+.calender_card {
+    top: 160px;
+    left: 136px;
+    width: 444px;
+    height: 272px;
+    background-color: #f0f0f0;
+}
+  
+.card {
+    top: 160px;
+    left: 604px;
+    width: 788px;
+    height: 272px;
+    background-color: #f0f0f0;
+  }
+  

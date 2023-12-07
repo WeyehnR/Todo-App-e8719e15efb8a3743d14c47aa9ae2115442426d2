@@ -1,0 +1,166 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca&display=swap');
+
+:root {
+    --color-gray: #f4f4f4;
+    --color-white: #ffffff;
+    --color-dark-gray: #444444;
+    --color-light-gray: #e1e1e1;
+    --color-black: #090909;
+    --sidebar-width: 15.625rem;
+    --sidebar-collapsed-width: 3.125rem;
+    --gray-card-width: 20.625rem;
+    --gray-card-height: 53.25rem;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--color-gray);
+    font-family: 'Lexend Deca', sans-serif;
+}
+
+.container {
+    display: flex;
+}
+
+.sidebar {
+    position:relative;
+    width: ;
+    transition: width 0.3s ease;
+}
+
+.sidebar.collapsed {
+    width: var(--sidebar-collapsed-width);
+}
+
+.content {
+    flex-grow: 1;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    padding: 0 1.25rem;
+}
+
+.menu-icon, .menu-heading {
+    cursor: pointer;
+    color: var(--color-dark-gray);
+    font-weight: 600;
+}
+
+.menu-icon {
+    font-size: 1.5625rem;
+    padding-right: 1.25rem;
+    position: absolute;
+    top: 1.5rem; /* Adjust to match your design */
+    right: 1.5rem; /* Positioned to the right within the sidebar */
+    z-index: 3; /* Above the gray card */
+}
+
+.menu-heading {
+    font-size: 1.5rem;
+    line-height: 2rem;
+    padding-left: 1.25rem;
+}
+
+.main_title {
+    color: #212529;
+    font-size: 3rem;
+    font-weight: 600;
+    letter-spacing: -1px;
+    line-height: 3.5rem;
+    margin-top: 0.625rem;
+}
+
+.date {
+    border: 1px solid var(--color-black);
+    border-radius: 0.3125rem;
+    padding: 0 0.9375rem;
+}
+
+.task-section {
+    padding: 1.25rem;
+    background-color: var(--color-white);
+    border-radius: 0.3125rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+    margin: 1.25rem;
+}
+
+.add-task-container {
+    display: flex;
+    align-items: center;
+    background-color: var(--color-white);
+    padding: 0.1875rem;
+    margin-top: 2.5rem;
+    margin-right: 1.25rem;
+    border-radius: 0.375rem;
+    border-bottom: 1px solid var(--color-light-gray);
+}
+
+.new-task-input {
+    flex-grow: 1;
+    padding: 0.75rem 0.5625rem;
+    font-size: 1rem;
+    border: 2px solid var(--color-white);
+    border-radius: 0.375rem;
+    margin-right: 0.75rem;
+}
+
+.new-task-input::placeholder {
+    color: #888;
+}
+
+.add-task-button {
+    padding: 0.625rem 1.5625rem;
+    border: none;
+    background-color: var(--color-white);
+    cursor: pointer;
+    border-radius: 0.25rem;
+    transition: background-color 0.2s;
+}
+
+.add-task-button:hover, .add-task-button:focus {
+    background-color: #e2e6ea;
+}
+
+.icon {
+    color: #7c7c7c;
+    font-size: 1.5rem;
+    display: inline-block;
+    line-height: 1;
+    vertical-align: middle;
+    margin: -0.125rem 0.3125rem 0;
+}
+
+.gray-card {
+    position: absolute;
+    top: 0;
+    left: 0; /* Adjusted to start from the left edge of the sidebar */
+    width: var(--gray-card-width);
+    height: var(--gray-card-height);
+    background-color: var(--color-light-gray);
+    border-radius: 1rem;
+    padding: 0.625rem;
+    transition: transform 0.3s ease; /* Smooth transition for sliding in and out */
+    transform: translateX(calc(-1 * var(--gray-card-width))); /* Hide off-screen to the left */
+    z-index: 2;
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    justify-content: flex-start; /* Align to the top */
+    align-items: flex-start; /* Align to the left */
+}
+
+.sidebar.expanded .gray-card {
+    transform: translateX(0); /* Slide in from the left */
+}
+
+.sidebar.expanded .content {
+    transform: translateX(var(--gray-card-width)); /* Slide content to the right */
+}
+
+.task {
+    border-radius: 0.9375rem;
+}

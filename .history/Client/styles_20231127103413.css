@@ -1,0 +1,708 @@
+body,html {
+    font-family: 'Lexend Deca';
+    background-color: #fafafa;
+    margin: 0;
+    padding: 0;
+    height: 101%;
+}
+
+
+.todo-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-top: 23px;
+    flex: 1;
+    min-height: 60vh; /* Adjust this value as needed */
+    background-color: rgba(250,250,250,1);
+    border: 2px solid #ebebeb;
+    border-radius: 8px;
+    padding: 0px 45px 25px;
+    box-sizing: border-box;
+    transition: margin-left 0.3s ease;
+    margin-left: 5%; /* Adjust this value as needed */
+    margin-right: -15%; /* Adjust this value as needed */
+    margin-bottom: 340px;
+}
+
+.todo-container.left-expanded {
+    margin-left: 393px; /* Width of the left menu card */
+}
+
+.todo-container.right-expanded {
+    margin-right: 23px; /* Width of the right menu card */
+}
+
+.todo-container.left-expanded.right-expanded {
+    margin-left: 393px; /* Width of the left menu card */
+    margin-right: 23px; /* Width of the right menu card */
+}
+
+.hidden {
+    display: none;
+}
+
+.todo-list {
+    position: relative;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-grow: 1;
+}
+.arrow-btn{
+    position: absolute;
+    right: 0;
+    background-image: url('icons/Icon right arrow.svg');
+    background-color: rgb(250, 250, 250,1);
+    border: 1px solid rgba(250,250,250,1);
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+}
+
+.app-container {
+    display: flex;
+}
+
+.left-menu-container,
+.right-menu-card {
+    width: 0;
+    transition: width 0.3s ease;
+    position:relative;
+}
+
+.left-menu-container.open,
+.right-menu-card.open {
+    width: 250px; /* Adjust as needed */
+}
+
+
+.todo-list li {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    font-size:x-large;
+}
+
+.todo-list li:last-child {
+    border-bottom: none;
+}
+
+.todo-list input[type="checkbox"] {
+    cursor: pointer;
+}
+
+.Today-Headings {
+    font-size: 60px;
+}
+
+#dayOfMonth {
+    border: 1px solid #838181;
+    border-radius: 8px;
+    padding: 5px;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+}
+
+/*
+ * HAMBURGER MENU
+ */
+
+.hamburger {
+    position:absolute;
+    top: 50px;
+    left: 24px;
+    font-size: 24px;
+    cursor: pointer;
+    font-family: 'Lexend Deca';
+    z-index: 2;
+    background-image: url('icons/Icon_bars.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 24px;
+    height: 24px;
+}
+
+.hamburger.left-expanded {
+    margin-left: 290px;
+}
+
+/*
+ * LEFT GRAY MENU CARD
+ */
+.left-menu-card {
+    position:absolute;
+    width: 0;
+    height: 870px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    transform: translateX(-100%);
+    z-index: 1;
+    background-color: #f4f4f4;
+    border-radius: 16px;
+}
+
+.left-menu-card.expanded {
+    top: 24px;
+    left: 24px;
+    width: 300px;
+    height: 870px;
+    background-color: #f4f4f4;
+    padding: 25px; 
+    transform: translateX(0);
+    padding-top: 0;
+}
+
+
+.menu-title {
+    display: none;
+    font-family: 'Lexend Deca';
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 40px;
+}
+
+.left-menu-card.expanded .menu-title {
+    display: block;
+    margin-left: 10px;
+}
+
+/*
+* RIGHT MENU CARD
+*/
+
+.right-menu-card {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 448px;
+    height: 900px;
+    background-color: #f4f4f4;
+    border-radius: 16px;
+    transition: transform 0.3s ease; /* Smooth transition for sliding effect*/
+    transform: translateX(100%); /* Start off-screen*/
+    /* other styles */
+}
+
+.right-menu-card.expanded {
+    transform: translateX(0); /* Slide in to view*/
+    margin-right: 10px;
+    height: 900px;
+    margin-top:20px;
+}
+
+
+.close-icon {
+    position: absolute;
+    top: 30px;
+    right: 35px;
+    /* other styles */
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.task-title {
+    color: #444444;
+    font-size: 24px;
+    font-family: "Lexend Deca";
+    font-weight: 600;
+    line-height: 32px;
+    position: absolute;
+    top: 10px; /* Adjust as needed */
+    left: 30px; /* Adjust as needed */
+}
+
+.task-rename {
+    position: absolute;
+    width: 400px;
+    height: 50px;
+    padding: 0px 8px;
+    border: 1px solid #ebebeb;
+    box-sizing: border-box;
+    border-radius: 8px;
+    background-color: rgba(235,235,235,0);
+    color: #7c7c7c;
+    font-size: 16px;
+    font-family: "Lexend Deca";
+    line-height: 24px;
+    outline: none;
+    margin-top:-720px;
+    margin-left: 24px;
+}
+
+.description-box {
+    position: absolute;
+    top: 133px;
+    left: 25px;
+    width: 400px;
+    height: 128px;
+    background-color:  rgba(235,235,235,0);
+    border-radius: 8px;
+    border: 1px solid #ebebeb;
+    box-sizing: border-box;
+    padding: 10px;
+    resize:none;
+    font-size: 16px;
+    font-family: "Lexend Deca";
+}
+
+.description-box::placeholder, .description-box input[type="text"] {
+    background-color: rgba(235,235,235,0);
+    font-size: 16px;
+    font-family: "Lexend Deca";
+    line-height: 24px;
+}
+
+.text {
+    color: #444444;
+    font-size: 14px;
+    font-family: "Lexend Deca";
+    padding: 10px;
+    text-align: left;
+    margin-left: 15px;  
+}
+.task-configuration {
+    margin-top: -190px; /* Adjust the value as needed */
+}
+
+.list,.due,.tags {
+    display: flex;
+    justify-content: space-between;
+    width: 100%; /* This ensures the flex container takes up the full width */
+}
+
+.list select, .due select {
+    cursor: pointer;
+    top: 297px;
+    left: 1086px;
+    width: 110px;
+    height: 34px;
+    padding: 0px 8px;
+    border: 1px solid #ebebeb;
+    box-sizing: border-box;
+    border-radius: 8px;
+    background-color: rgba(235,235,235,0);
+    color: #444444;
+    font-size: 14px;
+    font-family: "Lexend Deca";
+    line-height: 18px;
+    outline: none;
+}
+
+.tags button {
+    cursor: pointer;
+    top: 381px;
+    left: 1163px;
+    width: 103px;
+    height: 34px;
+    padding: 0px 8px;
+    border: 0;
+    box-sizing: border-box;
+    border-radius: 6px;
+    background-color: #ebebeb;
+    color: #444444;
+    font-size: 14px;
+    font-family: "Lexend Deca";
+    font-weight: 600;
+    line-height: 18px;
+    outline: none;
+}
+
+.Subtask {
+    color: #444444;
+    font-size: 24px;
+    font-family: "Lexend Deca";
+    font-weight: 600;
+    line-height: 32px;
+    margin-left: 20px;
+    margin-top: 60px;
+}
+.add-subtask-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: -200px;
+}
+
+#add-subtask-btn{
+    padding: 14px;
+    position: absolute;
+    left: 20px;
+    height: 6%;
+    background-color: rgba(221,221,221,0);
+    border: none;
+    cursor: pointer;
+    font-size: 50px;
+    text-align: center;
+}
+
+
+.input-container{
+    display: flex;
+    justify-content: center;
+    margin-left: 10px;
+    top: 479px;
+    left: 992px;
+    width: 400px;
+    height: 48px;
+    background-color: rgba(221,221,221,0);
+    border-radius: 8px;
+}
+
+#new-subtask-input::placeholder {
+    color: #7c7c7c;
+    font-size: 16px;
+    font-family: "Lexend Deca";
+    line-height: 24px;
+}
+
+#new-subtask-input{
+    padding-left: 40px;
+}
+
+#new-subtask-input {
+    top: 479px;
+    left: 992px;
+    width: 400px;
+    height: 48px;
+    background-color: rgba(221,221,221,0);
+    border-radius: 8px;
+}
+
+/*
+ * Search bar
+ */
+
+.search-container {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+/* Add a search icon next to the left of the placeholder text */
+.search-icon {
+    position: absolute;
+    border: none;
+    background: transparent;
+    /* additional styling for the icon */
+    /* grab the background image from the svg */
+    background-image: url('icons/Icon search.svg');
+    background-color: rgba(235,235,235,0);
+    /* adjust the size of that image */
+    background-size: 30px;
+    margin-left: 5px;
+    margin-top: 5px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.search-input {
+    width:100%;
+    padding-left: 40px;
+    height: 40px;
+    font-family: 'Lexend Deca'; /* Apply the Google Font */
+    font-size: 20px;
+    /* additional styling for the input */
+    background-color: rgba(235,235,235,0);
+    border-radius: 8px;
+    border: 1px solid #ebebeb;
+    box-sizing: border-box;
+}
+
+/* adjust size for placeholder search text */
+.search-input::placeholder {
+    font-family: 'Lexend Deca';
+    font-size: 20px;
+    line-height: 40px;
+}
+
+
+
+/*
+ * TASK SECTION
+ */
+.Tasks-menu-selection {
+    list-style-type: none;
+    padding-left: 0; /* Add this line */
+    margin-left: 0; /* Add this line */
+}
+
+.Tasks-menu-selection li {
+    top: 183px;
+    left: 40px;
+    width: 298px;
+    height: 40px;
+    background-color: rgba(221,221,221,0);
+    border-radius: 10px;
+}
+
+.Tasks-menu-selection li:hover {
+    background-color: rgba(221,221,221,0.5);
+}
+.Tasks-menu-selection li:hover .text-span {
+    font-weight: bolder;
+}
+
+.icon-svg img {
+    width: 20px; /* Adjust as needed */
+    height: 20px; /* Adjust as needed */
+    background-size: contain;
+    vertical-align: bottom;
+    padding-right: 10px;
+}
+
+.upcoming-menu-item,
+.today-menu-item,
+.calendar-menu-item,
+.sticky-menu-item {
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+}
+
+/*
+ * LISTS SECTION
+ */
+ .Lists-menu-selection {
+    list-style-type: none;
+    padding-left: 0; /* Add this line */
+    margin-left: 0; /* Add this line */
+ }
+
+ .Lists-menu-selection li {
+    top: 183px;
+    left: 40px;
+    width: 298px;
+    height: 40px;
+    background-color: rgba(221,221,221,0);
+    border-radius: 10px;
+ }
+
+ .Lists-menu-selection li:hover {
+    background-color: rgba(221,221,221,0.5);
+ }
+
+.Lists-menu-selection .menu-item:hover {
+    font-weight: bolder;
+}
+
+ .menu-item {
+    display: flex;
+    align-items: center;
+ }
+
+.personal::before, .work::before {
+    content: "";
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.personal::before {
+    background-color: blue; /* Replace with the color you want */
+    border-radius: 20%;
+}
+
+.work::before {
+    background-color: red; /* Replace with the color you want */
+    border-radius: 20%;
+}
+
+.add-list::before {
+    display: none;
+}
+
+.add-list {
+    cursor: pointer;
+    padding-left:5px;
+}
+
+ /*
+ * TAGS SECTION
+ */
+
+.Tags-menu-selection {
+    list-style-type: none;
+}
+
+.Tags-menu-selection {
+    list-style-type: none;
+    padding-left: 0; /* Add this line */
+    margin-left: 0; /* Add this line */
+}
+
+.tag1 {
+    background-color: lightgreen; /* Light gray */
+}
+
+.tag2 {
+    background-color: lightskyblue; /* Slightly darker gray */
+}
+
+.tag1,.tag2 {
+    display: inline-flex; 
+    padding: 5px; /* Padding around the text */
+    margin-bottom: 5px; /* Space between the items */
+    border-radius: 5px;
+    align-items: center; /* Add this line */
+}
+
+.add-tag:hover {
+    font-weight: bolder;
+    background-color: rgba(221,221,221,0.5);
+    border-radius: 10px;
+    width: 298px;
+    height: 40px;
+}
+
+.add-tag {
+    cursor: pointer;
+    padding-left:5px;
+    width: 298px;
+    height: 40px;
+}
+
+.settings {
+    position: absolute;
+    bottom: 60px;
+    background-color: rgba(221,221,221,0);
+    border: none;
+    font-size: 16px;
+    font-family: "Lexend Deca";
+    line-height: 24px;
+    width: 298px;
+    height: 40px;
+    text-align: left;
+    cursor: pointer;
+}
+
+.settings:hover {
+    font-weight: bolder;
+    background-color: rgba(221,221,221,0.5);
+    border-radius: 10px;
+    width: 298px;
+    height: 40px;
+}
+
+.signout {
+    position: absolute;
+    bottom: 10px;
+    background-color: rgba(221,221,221,0);
+    border: none;
+    font-size: 16px;
+    font-family: "Lexend Deca";
+    line-height: 24px;
+    width: 298px;
+    height: 40px;
+    text-align: left;
+    cursor: pointer;
+}
+
+.signout:hover {
+    font-weight: bolder;
+    background-color: rgba(221,221,221,0.5);
+    border-radius: 10px;
+    width: 298px;
+    height: 40px;
+}
+
+
+.delete-task-button{
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    cursor: pointer;
+    width: 188px;
+    height: 48px;
+    padding: 0px 8px;
+    border: 1px solid #dddddd;
+    box-sizing: border-box;
+    border-radius: 8px;
+    background-color: rgba(221,221,221,0);
+    color: #444444;
+    font-size: 16px;
+    font-family: "Lexend Deca";
+    font-weight: 600;
+    line-height: 24px;
+    outline: none;
+    z-index: 1;
+}
+
+.delete-task-button:hover {
+    font-weight: bolder;
+    background-color: rgba(221,221,221,0.5);
+    border-radius: 10px;
+    width: 188px;
+    height: 48px;
+}
+
+
+
+
+/*
+ * ADD TASK SECTION
+ */
+
+input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.add-task-container {
+    align-items: center;
+    position: relative;
+    border: 1px solid transparent;
+    width: 100%;
+    margin:auto;
+    /* box-sizing: border-box; */
+}
+
+.add-task-container input[type="text"] {
+    top: 120px;
+    width: 100%;
+    height: 48px;
+    background-color: rgba(250,250,250,0);
+    border-radius: 8px;
+    border: 1px solid #ebebeb;
+    box-sizing: border-box;
+    padding-left: 60px;
+    font-family: 'Lexend Deca';
+    font-size: x-large;
+}
+
+.add-task-container input[type="text"]:hover {
+    box-shadow: 0 0 10px rgba(0,0,0,025);
+}
+
+.add-task-container input[type="text"]:focus {
+    outline: none;
+}
+
+.add-task-container button {
+    position: absolute;
+    left: 10px;
+    top: 43%;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1px 6px;
+    border: none;
+    border-radius: 50%;
+    background-color: rgba(250,250,250,0);
+    color: gray;
+    font-size: 45px;
+    cursor: pointer;
+    font-family: 'Lexend Deca';
+}
+
+.add-task-container input[type="text"], .add-task button {
+    line-height: 40px;
+}
