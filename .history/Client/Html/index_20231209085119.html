@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List Application</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/">
+    <link rel="icon" href="favicon.ico">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Left Menu -->
+        <div class="left-menu-container" id="left-menu-container">
+            <div class="hamburger" id="ham-menu-toggle"></div>
+            <div class="left-menu-card" id="left-menu-card">
+                <h1 class="menu-title">Menu</h1>
+                <!-- Content of the left expanded gray card goes here -->
+                <!-- Search Bar -->
+                <div class="menu-search">
+                    <div class="search-container">
+                        <button class="search-icon"></button>
+                        <input type="text" placeholder="Search" class="search-input" />
+                      </div>
+                </div>
+                <!-- Tasks Section -->
+                <!-- Add a 'Tasks' Title -->
+                <h3 class="tasks-menu-title">Tasks</h2>
+                <ul class="Tasks-menu-selection">
+                    <li class="upcoming-menu-item">
+                        <span class="upcoming">
+                            <span class="upcoming-icon-svg icon-svg">
+                                <img src="icons/Icon angle double right.svg" alt="Double right arrow">
+                            </span>
+                        </span>
+                        <span class="text-span">Upcoming</span>
+                        <span class="upcoming-item-count"></span>
+                    </li> 
+                    <li class="today-menu-item">
+                        <span class="today-icon">
+                            <span class="today-icon-svg icon-svg">
+                                <img src="icons/Icon tasks.svg" alt="Calendar icon">
+                            </span>
+                        </span>
+                        <span class="text-span">Today</span>
+                        <span class="today-item-count"></span>
+                        <span id="today-task-counter" class="today-task-counter">0</span>
+                    </li>
+                    <!-- <li class="calendar-menu-item">
+                        <span class="calendar-icon">
+                            <span class="calendar-icon-svg icon-svg">
+                                <img src="icons/Icon calendar alt.svg" alt="Calendar icon">
+                            </span>
+                        </span>
+                        <span class="text-span">Calendar</span>
+                        <span class="calendar-item-count"></span>
+                    </li> -->
+                    <li class="sticky-menu-item">
+                        <span class="sticky-notes-icon">
+                            <span class="sticky-notes-icon-svg icon-svg">
+                                <img src="icons/Icon sticky note.svg" alt="Sticky note icon">
+                            </span>
+                        </span>
+                        <span class="text-span">Sticky Wall</span>
+                        <span class="sticky-item-count"></span>
+                    </li>
+                </ul>
+                <h3 class="lists-menu-title">Lists</h2>
+                <!-- Lists Section -->
+                <ul class="Lists-menu-selection">
+                </ul>
+                <button class="menu-item add-list">+ Add List</button>
+                <div class="new-list-border" id="new-list-form">
+                    <div class="list-bg-canvas">
+                        <input type="text" id="new-list-name" placeholder="List Name" class="list-rename-ph-text">
+                        <div id="dynamic-color-card" class="dynamic-color-card"></div>
+                    </div>
+                    <div id="color-selection" class="hover-selection">
+                        <div class="color-option-1"></div>
+                        <div class="color-option-2"></div>
+                        <div class="color-option-3"></div>
+                        <div class="color-option-4"></div>
+                        <div class="color-option-5"></div>
+                        <div class="color-option-6"></div>
+                        <div class="color-option-7"></div>
+                        <div class="color-option-8"></div>
+                    </div>
+                </div>
+                <h3 class="tags-menu-title">Tags</h2>
+                    <!-- Tags Section -->
+                <ul class="Tags-menu-selection">
+                </ul>
+                <button id="add-tag-button" class="menu-item add-tag">+ Add Tag</button>
+                <!-- Settings & Sign Out -->
+                <div class="menu-bottom">
+                    <button class="menu-button settings">
+                        <span class="settings-icon">
+                            <span class="settings-icon-svg icon-svg">
+                                <img src="icons/Icon settings.svg" alt="Settings icon">
+                            </span>
+                        </span>
+                        Settings
+                    </button>
+                    <button class="menu-button signout">
+                        <span class="sign-out-icon">
+                            <span class="sign-out-icon-svg icon-svg">
+                                <img src="icons/Icon sign out.svg" alt="Sign out icon">
+                            </span>
+                        </span>
+                        Sign out
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Todo Container -->
+        <div class="todo-container" id="todo-container">
+            <div class="date-header">
+              <h1 class="Today-Headings">Today <span id="dayOfMonth"></span></h1>
+              <button id="reset-btn">Reset</button>
+            </div>
+            <div class="add-task-container">
+                <input type="text" placeholder="Add New Task" id="new-task-input">
+                <button id="add-task-btn">+</button>
+            </div>
+            <ul class="todo-list">
+            </ul>
+        </div>
+        <!-- Right Menu -->
+        <div class="right-menu-card" id="right-menu-card">
+            <!-- Content of the right expanded gray card goes here -->
+            <h1 class="task-title">Task:</h1>
+            <input type="text" class="task-rename" placeholder="Rename Task">
+            <textarea class="description-box" placeholder="Task Description"></textarea> <!-- New description box -->
+            <div class="task-configuration">
+                <div class="list text">
+                    List
+                    <select id="list-select">
+                        <option value="">Select List</option>
+                        <!-- Add more options as needed -->
+                    </select>
+                </div>
+                <div class="due text">
+                    Due Date
+                    <input type="date" id="due-date-select">
+                </div>
+                <div class="time text">
+                    Time
+                    <input type="time" id="due-time-select">
+                </div>
+                <div class="tags text">
+                    Tags
+                    <select id="tags-select">
+                        <option value="">Select Tags</option>
+                        <!-- Add more options as needed -->
+                    </select>
+                </div>
+            </div>
+            <div class="add-subtask-container">
+                <div class="Subtask">SubTask:</div>
+                <div class="input-container">
+                    <button id="add-subtask-btn">+</button>
+                    <input type="text" placeholder="Add New Subtask" id="new-subtask-input">
+                </div>
+                <ul id="subtask-list"></ul> <!-- Add this line -->
+            </div>      
+            <img src="icons/Icon close.svg" alt="Close" class="close-icon">
+            <button class="button delete-task-button">Delete Task</button>
+            <button class="button save-changes-button">Save Changes</button>
+        </div>
+        <script type= "module" src="main.js"></script>
+    </div>
+</body>
+</html>

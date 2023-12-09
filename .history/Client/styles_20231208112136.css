@@ -1,0 +1,966 @@
+body,html {
+    font-family: 'Lexend Deca';
+    background-color: #fafafa;
+    margin: 0;
+    padding: 0;
+    height: 101%;
+}
+
+.reset-btn{
+    position: absolute;
+    right: 10px;
+    top:50px
+}
+
+
+.todo-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-top: 23px;
+    flex: 1;
+    min-height: 50vh; /* Adjust this value as needed */
+    max-height: 100vh; /* Adjust this value as needed */
+    background-color: rgba(250,250,250,1);
+    border: 2px solid #ebebeb;
+    border-radius: 8px;
+    padding: 0px 45px 25px;
+    box-sizing: border-box;
+    transition: margin-left 0.3s ease;
+    margin-left: 5%; /* Adjust this value as needed */
+    margin-bottom: 500px;
+    margin-right: 25px;
+    width: calc(100% - 5%);
+}
+
+.todo-container.left-expanded {
+    margin-left: 393px; /* Width of the left menu card */
+}
+
+.todo-container.right-expanded {
+    margin-right: 23px; /* Width of the right menu card */
+}
+
+.todo-container.left-expanded.right-expanded {
+    margin-left: 393px; /* Width of the left menu card */
+    margin-right: 23px; /* Width of the right menu card */
+}
+
+.hidden {
+    display: none;
+}
+
+.todo-list {
+    position: relative;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-grow: 1;
+}
+.arrow-btn{
+    position: absolute;
+    right: 0;
+    background-image: url('icons/Icon right arrow.svg');
+    background-color: rgb(250, 250, 250,1);
+    border: 1px solid rgba(250,250,250,1);
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+.app-container {
+    display: flex;
+}
+
+.left-menu-container,
+.right-menu-card {
+    width: 0;
+    transition: width 0.3s ease;
+    position:relative;
+}
+
+.left-menu-container.open,
+.right-menu-card.open {
+    width: 250px; /* Adjust as needed */
+}
+
+
+.todo-list li {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+}
+
+.todo-list li:last-child {
+    border-bottom: none;
+}
+
+.todo-list input[type="checkbox"] {
+    cursor: pointer;
+}
+
+.todo-list.overflow {
+    height: 300px; /* Adjust this value as needed */
+    overflow-y: scroll;
+    direction: rtl; /* Add this line */
+}
+
+.todo-list.overflow li {
+    direction: ltr; /* Add this line */
+}
+
+.task-completed {
+    text-decoration: line-through;
+}
+
+.Tasks-menu-selection li {
+	font-size: 20px;
+}
+
+.Today-Headings {
+    font-size: 48px;
+}
+
+#dayOfMonth {
+    border: 1px solid #838181;
+    border-radius: 8px;
+    padding: 5px;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+}
+
+/*
+ * HAMBURGER MENU
+ */
+
+.hamburger {
+    position:absolute;
+    top: 50px;
+    left: 24px;
+    font-size: 24px;
+    cursor: pointer;
+    font-family: 'Lexend Deca';
+    z-index: 2;
+    background-image: url('icons/Icon_bars.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 24px;
+    height: 24px;
+}
+
+.hamburger.left-expanded {
+    margin-left: 290px;
+}
+
+/*
+ * LEFT GRAY MENU CARD
+ */
+.left-menu-card {
+    position:absolute;
+    width: 0;
+    height: 870px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    transform: translateX(-100%);
+    z-index: 1;
+    background-color: #f4f4f4;
+    border-radius: 16px;
+}
+
+.left-menu-card.expanded {
+    top: 24px;
+    left: 24px;
+    width: 300px;
+    height: 870px;
+    background-color: #f4f4f4;
+    padding: 25px; 
+    transform: translateX(0);
+    padding-top: 0;
+}
+
+
+.menu-title {
+    display: none;
+    font-family: 'Lexend Deca';
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 40px;
+}
+
+.left-menu-card.expanded .menu-title {
+    display: block;
+    margin-left: 10px;
+}
+
+.today-task-counter {
+	cursor: pointer;
+	width: 32px;
+	height: 28px;
+	padding: 0px 8px;
+	border: 0;
+	box-sizing: border-box;
+	border-radius: 4px;
+	background-color: #fafafa;
+	color: #444444;
+	font-size: 24px;
+	font-family: "Lexend Deca";
+	font-weight: 600;
+	line-height: 26px;
+	outline: none;
+	margin-left: 150px;
+	text-align: center;
+	z-index: 1;
+}
+
+.today-task-counter:hover {
+    background-color: #ffd43b;
+}
+
+.new-list-border {
+    top: 578px;
+    left: 40px;
+    width: 298px;
+    height: 120px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    border: 1px solid #dddddd;
+    box-sizing: border-box;
+}
+
+.list-bg-canvas {
+    top: 594px;
+    left: 56px;
+    width: 266px;
+    height: 40px;
+    background-color: rgba(250,250,250,0);
+    border-radius: 8px;
+    border: 1px solid #dddddd;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 15px;
+    margin-top: 15px;
+}
+
+.list-rename-ph-text {
+    color: #7c7c7c;
+    font-size: 16px;
+    font-family: "Lexend Deca";
+    line-height: 24px;
+    background-color: #f4f4f4;
+    border: none;
+}
+
+.dynamic-color-card {
+    top: 606px;
+    left: 72px;
+    width: 16px;
+    height: 16px;
+    background-color: #5c7cfa;
+    border-radius: 4px;
+    margin-left: 10px;
+}
+
+.color-option-1:hover,
+.color-option-2:hover,
+.color-option-3:hover,
+.color-option-4:hover,
+.color-option-5:hover,
+.color-option-6:hover,
+.color-option-7:hover,
+.color-option-8:hover {
+    width: 20px;
+    height: 20px;
+    border: 3px solid #807e7e;
+    box-sizing: border-box;
+}
+
+#color-selection {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+#new-list-form {
+    display: none;
+}
+
+.color-option-1,
+.color-option-2,
+.color-option-3,
+.color-option-4,
+.color-option-5,
+.color-option-6, 
+.color-option-7,
+.color-option-8{
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    margin: 0 0;
+}
+
+.color-option-1 {
+    background-color: #5c7cfa;
+}
+
+.color-option-2 {
+    background-color: #f6bc26;
+}
+
+.color-option-3 {
+    background-color: #f66d9b;
+}
+
+.color-option-4 {
+    
+    background-color: #57bb8a;
+}
+
+.color-option-5 {
+    
+    background-color: #f36262;
+}
+
+.color-option-6 {
+    background-color: #7266ba;
+}
+
+.color-option-7 {
+    background-color: #0077b5;
+}
+
+.color-option-8 {
+    background-color: #ff5722;
+}
+
+.menu-item.tag {
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 4px;
+	padding: 0 5px;
+	margin: 2px;
+	
+	font-size: 20px;
+}
+
+.delete-tag{
+    border:none;
+    border-radius:6px;
+    margin:2px;
+    cursor: pointer;
+}
+
+/*
+* RIGHT MENU CARD
+*/
+
+.right-menu-card {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 448px;
+    height: 900px;
+    background-color: #f4f4f4;
+    border-radius: 16px;
+    transition: transform 0.3s ease; /* Smooth transition for sliding effect*/
+    transform: translateX(100%); /* Start off-screen*/
+    /* other styles */
+    display: none; 
+}
+
+.right-menu-card.expanded {
+    display: flex;
+    transform: translateX(0); /* Slide in to view*/
+    margin-right: 10px;
+    height: 900px;
+    margin-top:20px;
+}
+
+
+.close-icon {
+    position: absolute;
+    top: 30px;
+    right: 35px;
+    /* other styles */
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.task-title {
+    color: #444444;
+    font-size: 24px;
+    font-family: "Lexend Deca";
+    font-weight: 600;
+    line-height: 32px;
+    position: absolute;
+    top: 10px; /* Adjust as needed */
+    left: 30px; /* Adjust as needed */
+}
+
+.task-rename {
+	position: absolute;
+	width: 400px;
+	height: 34px;
+	padding: 0px 8px;
+	border: 1px solid #ebebeb;
+	box-sizing: border-box;
+	border-radius: 8px;
+	background-color: rgba(235,235,235,0);
+	color: #7c7c7c;
+	font-size: 16px;
+	font-family: "Lexend Deca";
+	line-height: 24px;
+	outline: none;
+	/* margin-top: -754px; */
+	margin-left: 24px;
+	top: 78px;
+}
+
+
+.description-box {
+    position: absolute;
+    top: 133px;
+    left: 25px;
+    width: 400px;
+    height: 128px;
+    background-color:  rgba(235,235,235,0);
+    border-radius: 8px;
+    border: 1px solid #ebebeb;
+    box-sizing: border-box;
+    padding: 10px;
+    resize:none;
+    font-size: 16px;
+    font-family: "Lexend Deca";
+}
+
+.description-box::placeholder, .description-box input[type="text"] {
+    background-color: rgba(235,235,235,0);
+    font-size: 16px;
+    font-family: "Lexend Deca";
+    line-height: 24px;
+}
+
+.text {
+    color:  rgba(235,235,235,0);;
+    font-size: 14px;
+    font-family: "Lexend Deca";
+    padding: 10px;
+    text-align: left;
+    margin-left: 15px;  
+}
+.task-configuration {
+	margin-top: 269px;
+}
+
+
+.list, .due, .tags, .time {
+	display: flex;
+	justify-content: space-between;
+	width: 48%;
+}
+
+#due-date-select {
+	width: 132px;
+	height: 30px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	padding: 5px;
+	font-size: 16px;
+}
+
+ul.todo-list {
+    list-style-type: none;
+}li {
+    list-style-type: none;
+}
+
+.list select, .due select, .tags select,.time select, #add-tag-dropdown {
+	cursor: pointer;
+	top: 297px;
+	left: 1086px;
+	width: 146px;
+	height: 34px;
+	padding: 0px 8px;
+	border: 1px solid #ebebeb;
+	box-sizing: border-box;
+	border-radius: 8px;
+	background-color: rgba(235,235,235,0);
+	color: #444444;
+	font-size: 14px;
+	font-family: "Lexend Deca";
+	line-height: 18px;
+	outline: none;
+}
+
+
+#add-tag-dropdown {
+    z-index: 1; /* add this line */
+}
+
+#subtask-list {
+    list-style-type: none;
+    max-height: 200px;
+    direction:ltr;
+}
+
+#subtask-list li {
+    border-bottom: 1px solid #eee;
+    padding: 8px 0;
+}
+
+
+.Subtask {
+    color: #444444;
+    font-size: 24px;
+    font-family: "Lexend Deca";
+    font-weight: 600;
+    line-height: 32px;
+    margin-left: 20px;
+    
+}
+.add-subtask-container {
+    position: absolute;
+    top: 477px;
+    left: 200px;
+    margin-left: -200px;
+    height: auto; /* Adjust this value as needed */
+    max-height: 310px;
+    overflow-y: auto;
+    overflow: visible; 
+}
+
+#subtask-list {
+    max-height: 200px; /* Adjust this value to fit your needs */
+    overflow-y: auto; /* Show scrollbar when content exceeds max-height */
+    padding-right: 20px;
+}
+
+.input-container {
+    display: flex;
+    align-items: center;
+}
+
+
+#add-subtask-btn {
+    padding: 14px;
+    position: absolute;
+    left: 20px;
+    height: 6%;
+    color: #7c7c7c;
+    background-color:rgba(221,221,221,0);
+    fill: rgba(221,221,221,0);
+    border: none;
+    cursor: pointer;
+    font-size: 50px;
+    display: flex; /* Add this line */
+    justify-content: center; /* Add this line */
+    align-items: center; /* Add this line */
+}
+
+
+.input-container{
+    display: flex;
+    justify-content: center;
+    margin-left: 10px;
+    top: 479px;
+    left: 992px;
+    width: 400px;
+    height: 48px;
+    background-color: rgba(221,221,221,0);
+}
+
+#new-subtask-input::placeholder {
+    color: #7c7c7c;
+    font-size: 20px;
+    font-family: "Lexend Deca";
+    line-height: 24px;
+}
+
+#new-subtask-input{
+    padding-left: 60px;
+    font-size: 20px;
+}
+
+#new-subtask-input {
+    width: 400px;
+    height: 48px;
+    background-color: rgba(221,221,221,0);
+    border-radius: 8px;
+    border: 1px solid #ebebeb;
+    outline: none;
+    margin-left: 12px;
+}
+
+/*
+ * Search bar
+ */
+
+.search-container {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+/* Add a search icon next to the left of the placeholder text */
+.search-icon {
+    position: absolute;
+    border: none;
+    background: transparent;
+    /* additional styling for the icon */
+    /* grab the background image from the svg */
+    background-image: url('icons/Icon search.svg');
+    background-color: rgba(235,235,235,0);
+    /* adjust the size of that image */
+    background-size: 30px;
+    margin-left: 5px;
+    margin-top: 5px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.search-input {
+    width:100%;
+    padding-left: 40px;
+    height: 40px;
+    font-family: 'Lexend Deca'; /* Apply the Google Font */
+    font-size: 20px;
+    /* additional styling for the input */
+    background-color: rgba(235,235,235,0);
+    border-radius: 8px;
+    border: 1px solid #ebebeb;
+    box-sizing: border-box;
+}
+
+/* adjust size for placeholder search text */
+.search-input::placeholder {
+    font-family: 'Lexend Deca';
+    font-size: 20px;
+    line-height: 40px;
+}
+
+
+
+/*
+ * TASK SECTION
+ */
+.Tasks-menu-selection {
+    list-style-type: none;
+    padding-left: 0; /* Add this line */
+    margin-left: 0; /* Add this line */
+}
+
+.Tasks-menu-selection li {
+    top: 183px;
+    left: 40px;
+    width: 298px;
+    height: 40px;
+    background-color: rgba(221,221,221,0);
+    border-radius: 10px;
+}
+
+.Tasks-menu-selection li:hover {
+    background-color: rgba(221,221,221,0.5);
+}
+.Tasks-menu-selection li:hover .text-span {
+    font-weight: bolder;
+}
+
+.icon-svg img {
+    width: 30px; /* Adjust as needed */
+    height: 25px; /* Adjust as needed */
+    background-size: contain;
+    vertical-align: bottom;
+    padding-right: 10px;
+}
+
+.upcoming-menu-item,
+.today-menu-item,
+.calendar-menu-item,
+.sticky-menu-item {
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+}
+
+/*
+ * LISTS SECTION
+ */
+ .Lists-menu-selection {
+    list-style-type: none;
+    padding-left: 0; /* Add this line */
+    margin-left: 0; /* Add this line */
+ }
+
+ .Lists-menu-selection li {
+	width: 298px;
+	height: 40px;
+	background-color: rgba(221,221,221,0);
+	border-radius: 10px;
+	font-size: 20px;
+}
+
+ .Lists-menu-selection li:hover {
+    background-color: rgba(221,221,221,0.5);
+ }
+
+.Lists-menu-selection .menu-item:hover {
+    font-weight: bolder;
+}
+
+ .menu-item {
+    display: flex;
+    align-items: center;
+ }
+
+
+.new-list::before {
+    content: "";
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    vertical-align: middle;
+    border-radius: 20%;
+    background-color: var(--dynamic-color-card);
+}
+
+.new-list-icon {
+    background-color: var(--dynamic-color-card);
+}
+
+.add-list::before {
+    display: none;
+}
+
+.add-list {
+	cursor: pointer;
+	padding-left: 5px;
+	width: 298px;
+	height: 40px;
+	border-radius: 10px;
+	font-size: 20px;
+    border: none;
+    background-color: rgba(221,221,221,0);
+}
+
+.delete-list {
+    display: none;
+    position: absolute;
+    right: 40px;
+    cursor: pointer;
+    border: none;
+}
+
+.delete-list:hover {
+    color: red; /* Change the color to red on hover */
+}
+
+.new-list:hover .delete-list {
+    display: inline;
+}
+
+ /*
+ * TAGS SECTION
+ */
+
+.Tags-menu-selection {
+    list-style-type: none;
+}
+
+.Tags-menu-selection {
+	list-style-type: none;
+	padding-left: 0;
+	margin-left: 0;
+    max-height: 140px;
+    overflow-y: auto;
+}
+
+.tag1 {
+    background-color: lightgreen; /* Light gray */
+}
+
+.tag2 {
+    background-color: lightskyblue; /* Slightly darker gray */
+}
+
+.tag1,.tag2 {
+    display: inline-flex; 
+    padding: 5px; /* Padding around the text */
+    margin-bottom: 5px; /* Space between the items */
+    border-radius: 5px;
+    align-items: center; /* Add this line */
+}
+
+.add-tag:hover,.add-list:hover {
+    font-weight: bolder;
+    background-color: rgba(221,221,221,0.5);
+    border-radius: 10px;
+    width: 298px;
+    height: 40px;
+}
+
+.add-tag {
+    cursor: pointer;
+    padding-left:5px;
+    width: 298px;
+    height: 40px;
+    border-radius: 10px;
+    font-size: 20px;
+    border: none;
+    background-color: rgba(221,221,221,0);
+}
+
+.settings {
+    position: absolute;
+    bottom: 60px;
+    background-color: rgba(221,221,221,0);
+    border: none;
+    font-size: 16px;
+    font-family: "Lexend Deca";
+    line-height: 24px;
+    width: 298px;
+    height: 40px;
+    text-align: left;
+    cursor: pointer;
+}
+
+.settings:hover {
+    font-weight: bolder;
+    background-color: rgba(221,221,221,0.5);
+    border-radius: 10px;
+    width: 298px;
+    height: 40px;
+}
+
+.signout {
+    position: absolute;
+    bottom: 10px;
+    background-color: rgba(221,221,221,0);
+    border: none;
+    font-size: 16px;
+    font-family: "Lexend Deca";
+    line-height: 24px;
+    width: 298px;
+    height: 40px;
+    text-align: left;
+    cursor: pointer;
+}
+
+.signout:hover {
+    font-weight: bolder;
+    background-color: rgba(221,221,221,0.5);
+    border-radius: 10px;
+    width: 298px;
+    height: 40px;
+}
+
+
+.delete-task-button, .save-changes-button{
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    cursor: pointer;
+    width: 188px;
+    height: 48px;
+    padding: 0px 8px;
+    border: 1px solid #dddddd;
+    box-sizing: border-box;
+    border-radius: 8px;
+    background-color: rgba(221,221,221,0);
+    color: #444444;
+    font-size: 16px;
+    font-family: "Lexend Deca";
+    font-weight: 600;
+    line-height: 24px;
+    outline: none;
+    z-index: 1;
+}
+
+.save-changes-button{
+    margin-left: 220px;
+}
+
+.save-changes-button:hover{
+    background-color: #ffd43b;
+
+}
+
+.delete-task-button:hover {
+    font-weight: bolder;
+    background-color: red;
+    border-radius: 10px;
+    width: 188px;
+    height: 48px;
+}
+
+
+
+
+/*
+ * ADD TASK SECTION
+ */
+
+input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.add-task-container {
+    align-items: center;
+    position: relative;
+    border: 1px solid transparent;
+    width: 100%;
+    margin:auto;
+    /* box-sizing: border-box; */
+}
+
+.add-task-container input[type="text"] {
+    top: 120px;
+    width: 100%;
+    height: 48px;
+    background-color: rgba(250,250,250,0);
+    border-radius: 8px;
+    border: 1px solid #ebebeb;
+    box-sizing: border-box;
+    padding-left: 60px;
+    font-family: 'Lexend Deca';
+    font-size: 16px;
+}
+
+.add-task-container input[type="text"]:hover {
+    box-shadow: 0 0 10px rgba(0,0,0,025);
+}
+
+.add-task-container input[type="text"]:focus {
+    outline: none;
+}
+
+.add-task-container button {
+    position: absolute;
+    left: 10px;
+    top: 43%;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1px 6px;
+    border: none;
+    border-radius: 50%;
+    background-color: rgba(250,250,250,0);
+    color: gray;
+    font-size: 45px;
+    cursor: pointer;
+    font-family: 'Lexend Deca';
+}
+
+.add-task-container input[type="text"], .add-task button {
+    line-height: 40px;
+}
