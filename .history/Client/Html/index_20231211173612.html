@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List Application</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca&display=swap" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="../styles/styles.css"> -->
+    <link rel="stylesheet" href="../styles/Todo Container.css">
+    <link rel="icon" href="favicon.ico">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Left Menu -->
+                <!-- Todo Container -->
+        <div class="todo-container" id="todo-container">
+            <div class="date-header">
+              <h1 class="Today-Headings">Today <span id="dayOfMonth"></span></h1>
+              <button id="reset-btn">Reset</button>
+            </div>
+            <div class="add-task-container">
+                <input type="text" placeholder="Add New Task" id="new-task-input">
+                <button id="add-task-btn">+</button>
+            </div>
+            <ul class="todo-list">
+            </ul>
+        </div>
+        <!-- Right Menu -->
+        <div class="right-menu-card" id="right-menu-card">
+            <!-- Content of the right expanded gray card goes here -->
+            <h1 class="task-title">Task:</h1>
+            <input type="text" class="task-rename" placeholder="Rename Task">
+            <textarea class="description-box" placeholder="Task Description"></textarea> <!-- New description box -->
+            <div class="task-configuration">
+                <div class="list text">
+                    List
+                    <select id="list-select">
+                        <option value="">Select List</option>
+                        <!-- Add more options as needed -->
+                    </select>
+                </div>
+                <div class="due text">
+                    Due Date
+                    <input type="date" id="due-date-select">
+                </div>
+                <div class="time text">
+                    Time
+                    <input type="time" id="due-time-select">
+                </div>
+                <div class="tags text">
+                    Tags
+                    <select id="tags-select">
+                        <option value="">Select Tags</option>
+                        <!-- Add more options as needed -->
+                    </select>
+                </div>
+            </div>
+            <div class="add-subtask-container">
+                <div class="Subtask">SubTask:</div>
+                <div class="input-container">
+                    <button id="add-subtask-btn">+</button>
+                    <input type="text" placeholder="Add New Subtask" id="new-subtask-input">
+                </div>
+                <ul id="subtask-list"></ul> <!-- Add this line -->
+            </div>      
+            <img src="../icons/Icon close.svg" alt="Close" class="close-icon">
+            <button class="button delete-task-button">Delete Task</button>
+            <button class="button save-changes-button">Save Changes</button>
+        </div>
+        <script type= "module" src="../Main App/main.js"></script>
+    </div>
+</body>
+</html>

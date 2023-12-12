@@ -1,0 +1,185 @@
+.app-container {
+    display: flex;
+    font-family: 'Lexend Deca';
+}
+
+.todo-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-top: 23px;
+    flex: 1;
+    min-height: 50vh; /* Adjust this value as needed */
+    max-height: 100vh; /* Adjust this value as needed */
+    border: 2px solid #ebebeb;
+    border-radius: 8px;
+    padding: 0px 45px 25px;
+    box-sizing: border-box;
+    transition: margin-left 0.3s ease;
+    margin-left: 5%; /* Adjust this value as needed */
+    margin-bottom: 500px;
+    margin-right: 25px;
+    width: calc(100% - 5%);
+}
+
+.hidden {
+    display: none;
+}
+
+li.completed label {
+    text-decoration: line-through;
+}
+
+ul.todo-list {
+    list-style-type: none;
+}li {
+    list-style-type: none;
+}
+
+.todo-list {
+    position: relative;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-grow: 1;
+    max-height: 300px; /* Adjust this value based on the height of your tasks */
+    overflow-y: auto;
+}
+
+.arrow-btn {
+    position: absolute;
+    right: 15px;
+    background-image: url('../icons/Icon right arrow.svg');
+    background-color: rgb(250, 250, 250, 1);
+    border: 1px solid rgba(250, 250, 250, 1);
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+.todo-list li {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+}
+
+.todo-list li:last-child {
+    border-bottom: none;
+}
+
+.todo-list input[type="checkbox"] {
+    cursor: pointer;
+}
+
+.todo-list.overflow {
+    height: 300px; /* Adjust this value as needed */
+    overflow-y: scroll;
+    direction: rtl; /* Add this line */
+}
+
+.todo-list.overflow li {
+    direction: ltr; /* Add this line */
+}
+
+.task-completed {
+    text-decoration: line-through;
+}
+
+.reset-btn {
+    position: absolute;
+    right: 10px;
+    top: 50px;
+}
+
+.Tasks-menu-selection li {
+    font-size: 20px;
+}
+
+.Today-Headings {
+    font-size: 48px;
+}
+
+#dayOfMonth {
+    border: 1px solid #838181;
+    border-radius: 8px;
+    padding: 5px;
+    15px
+}
+
+.header {
+    display: flex;
+    align-items: center;
+}
+
+
+.todo-container.left-expanded {
+    margin-left: 393px; /* Width of the left menu card */
+}
+
+.todo-container.right-expanded {
+    margin-right: 471px; /* Width of the right menu card */
+}
+
+.todo-container.left-expanded.right-expanded {
+    margin-left: 393px; /* Width of the left menu card */
+    margin-right: 472px; /* Width of the right menu card */
+}
+
+
+input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.add-task-container {
+    align-items: center;
+    position: relative;
+    border: 1px solid transparent;
+    width: 100%;
+    margin:auto;
+    /* box-sizing: border-box; */
+}
+
+.add-task-container input[type="text"] {
+    top: 120px;
+    width: 100%;
+    height: 48px;
+    background-color: rgba(250,250,250,0);
+    border-radius: 8px;
+    border: 1px solid #ebebeb;
+    box-sizing: border-box;
+    padding-left: 60px;
+    font-family: 'Lexend Deca';
+    font-size: 16px;
+}
+
+.add-task-container input[type="text"]:hover {
+    box-shadow: 0 0 10px rgba(0,0,0,025);
+}
+
+.add-task-container input[type="text"]:focus {
+    outline: none;
+}
+
+.add-task-container button {
+    position: absolute;
+    left: 10px;
+    top: 43%;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1px 6px;
+    border: none;
+    border-radius: 50%;
+    background-color: rgba(250,250,250,0);
+    color: gray;
+    font-size: 45px;
+    cursor: pointer;
+    font-family: 'Lexend Deca';
+}
+
+.add-task-container input[type="text"], .add-task button {
+    line-height: 40px;
+}
