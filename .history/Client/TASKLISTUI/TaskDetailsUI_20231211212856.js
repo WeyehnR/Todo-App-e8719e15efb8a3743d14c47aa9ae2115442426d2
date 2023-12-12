@@ -1,7 +1,6 @@
 import DOMHelper from "../DOMHelper/DOMHelper.js";
 import Subtask from "../Subtask/Subtask.js";
 import TaskSender from "./TaskSender.js";
-import UI from "../UI/UI.js";
 
 
 export default class TaskDetailsUI {
@@ -93,42 +92,43 @@ export default class TaskDetailsUI {
     }
     
     // Delete a task by its ID
-    async deleteTask(activeTaskId) {
-        // Send a DELETE request to the server
-        const response = await fetch(`/api/tasks/${activeTaskId}`, {
-            method: 'DELETE',
-        });
+async deleteTask(activeTaskId) {
+    // Send a DELETE request to the server
+    const response = await fetch(`/api/tasks/${activeTaskId}`, {
+        method: 'DELETE',
+    });
 
-        if (!response.ok) {
-            if (response.status === 404) {
-                // If the server returns a 404 status, assume the task has already been deleted
-                console.log(`Task ${activeTaskId} has already been deleted`);
-            } else {
-                // If the server returns any other error status, throw an error
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-        }
-
-        // Update the task data
-        this.taskManager.deleteTask(activeTaskId);
-
-        // Update the UI
-        const activeTaskElement = this.domHelper.querySelector(`[data-task="${activeTaskId}"]`);
-        if (activeTaskElement) {
-            activeTaskElement.remove();
-        }
-
-        // Update the active task
-        localStorage.removeItem('activeTaskId');
-        if (this.taskManager.getTasks().length === 0) {
-            this.closeRightMenu();
+    if (!response.ok) {
+        if (response.status === 404) {
+            // If the server returns a 404 status, assume the task has already been deleted
+            console.log(`Task ${activeTaskId} has already been deleted`);
         } else {
-            // If there are remaining tasks, set the activeTaskId to the ID of the first task
-            const remainingTasks = this.taskManager.getTasks();
-            const newActiveTaskId = remainingTasks[0].id;
-            localStorage.setItem('activeTaskId', newActiveTaskId);
+            // If the server returns any other error status, throw an error
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
     }
+
+    // Update the task data
+    this.taskManager.deleteTask(activeTaskId);
+
+    // Update the UI
+    const activeTaskElement = this.domHelper.querySelector(`[data-task="${activeTaskId}"]`);
+    if (activeTaskElement) {
+        activeTaskElement.remove();
+    }
+
+    // Update the active task
+    localStorage.removeItem('activeTaskId');
+    if (this.taskManager.getTasks().length === 0) {
+        this.closeRightMenu();
+    } else {
+        // If there are remaining tasks, set the activeTaskId to the ID of the first task
+        const remainingTasks = this.taskManager.getTasks();
+        const newActiveTaskId = remainingTasks[0].id;
+        localStorage.setItem('activeTaskId', newActiveTaskId);
+        this.openRightMenu(newActiveTaskId);
+    }
+}
 
     async updateTaskWithSubtask(taskId, subtask) {
         console.log(`Updating task with ID: ${taskId}`);
@@ -329,15 +329,8 @@ export default class TaskDetailsUI {
         // Populate the task details UI with the fetched data
         this.taskRename.value = task.name;
         this.descriptionBox.value = task.description;
-
-        this.ui = new UI()
-
-        // Wait for the dropdown menus to be populated
-        await Promise.all([this.ui.populateDropdownMenus()]);
-
-        // Set the value of listSelect and tagsSelect to the values from the task object
-        this.listSelect.value = task.list;
-        this.tagsSelect.value = task.tags;
+        // If a list is selected, set the value to the selected list. Otherwise, set it to the first option
+        this.listSelect.value = task.selectedList ? task.selectedList : this.listSelect.options[0].value;
 
         // Check if the selectedDueDate and selectedTime are in the correct format before setting the value
         if (task.selectedDueDate && task.selectedDueDate !== 'Select Due Date') {
@@ -346,6 +339,9 @@ export default class TaskDetailsUI {
         if (task.selectedTime && task.selectedTime !== 'Select Time') {
             this.timeSelect.value = task.selectedTime;
         }
+
+        // If a tag is selected, set the value to the selected tag. Otherwise, set it to the first option
+        this.tagsSelect.value = task.selectedTags ? task.selectedTags : this.tagsSelect.options[0].value;
 
         // Clear the subtask list
         while (this.subtaskList.firstChild) {
@@ -357,6 +353,17 @@ export default class TaskDetailsUI {
             this.addSubtaskToDOM(subtask);
         });
     }
+    
 
+    // Open the task details view
+    openTaskDetails(taskId) {
+        this.loadTaskDetailsFromServer(taskId);
+        this.rightMenuCard.classList.add('expanded');
+        this.rightMenuCard.style.display = 'block';
+        this.todoContainer.classList.add('right-expanded');
+        this.todoContainer.style.width = 'calc(100% - 40%)';
+    }
+    
+    // ... (other methods)
 }
     

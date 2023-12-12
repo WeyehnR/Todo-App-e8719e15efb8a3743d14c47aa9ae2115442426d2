@@ -111,35 +111,32 @@ export default class UI {
 
         // Populate dropdown menus
     populateDropdownMenus() {
-        return new Promise((resolve) => {
-            // Populate lists dropdown menu
-            const listSelectElement = this.domHelper.querySelector('.list select');
-            
-            // Clear the current options
-            listSelectElement.innerHTML = '';
-            
-            // Create the default option
-            const defaultOption = document.createElement('option');
-            defaultOption.value = '';
-            defaultOption.textContent = 'Select List';
-            listSelectElement.appendChild(defaultOption);
+        // Populate lists dropdown menu
+        const listSelectElement = this.domHelper.querySelector('.list select');
+        
+        // Clear the current options
+        listSelectElement.innerHTML = '';
+        
+        // Create the default option
+        const defaultOption = document.createElement('option');
+        defaultOption.value = '';
+        defaultOption.textContent = 'Select List';
+        listSelectElement.appendChild(defaultOption);
 
-            const lists = JSON.parse(localStorage.getItem('lists')) || [];
-            lists.forEach(list => {
-                const option = document.createElement('option');
-                option.value = list.name;
-                option.textContent = list.name;
-                listSelectElement.appendChild(option);
-            });
-
-            // Set the value of the dropdown menu to the saved selected list
-            const selectedList = localStorage.getItem('selectedList');
-            if (selectedList) {
-                listSelectElement.value = selectedList;
-            }
-
-            resolve();
+        const lists = JSON.parse(localStorage.getItem('lists')) || [];
+        lists.forEach(list => {
+            const option = document.createElement('option');
+            option.value = list.name;
+            option.textContent = list.name;
+            listSelectElement.appendChild(option);
         });
+
+        // Set the value of the dropdown menu to the saved selected list
+        const selectedList = localStorage.getItem('selectedList');
+        if (selectedList) {
+            listSelectElement.value = selectedList;
+        }
+        
     }
 
 

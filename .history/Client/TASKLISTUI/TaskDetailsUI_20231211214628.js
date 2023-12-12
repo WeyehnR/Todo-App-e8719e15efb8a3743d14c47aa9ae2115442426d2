@@ -1,7 +1,6 @@
 import DOMHelper from "../DOMHelper/DOMHelper.js";
 import Subtask from "../Subtask/Subtask.js";
 import TaskSender from "./TaskSender.js";
-import UI from "../UI/UI.js";
 
 
 export default class TaskDetailsUI {
@@ -315,48 +314,46 @@ export default class TaskDetailsUI {
     }
 
     async loadTaskDetailsFromServer() {
-        // Get the active task ID from local storage
-        const taskId = localStorage.getItem('activeTaskId');
+    // Get the active task ID from local storage
+    const taskId = localStorage.getItem('activeTaskId');
 
-        if (!taskId) {
-            console.log('No active task ID found in local storage');
-            return;
-        }
-
-        // Fetch the task details from the server
-        const task = await this.taskSender.getTaskFromServer(taskId);
-
-        // Populate the task details UI with the fetched data
-        this.taskRename.value = task.name;
-        this.descriptionBox.value = task.description;
-
-        this.ui = new UI()
-
-        // Wait for the dropdown menus to be populated
-        await Promise.all([this.ui.populateDropdownMenus()]);
-
-        // Set the value of listSelect and tagsSelect to the values from the task object
-        this.listSelect.value = task.list;
-        this.tagsSelect.value = task.tags;
-
-        // Check if the selectedDueDate and selectedTime are in the correct format before setting the value
-        if (task.selectedDueDate && task.selectedDueDate !== 'Select Due Date') {
-            this.dueDateSelect.value = task.selectedDueDate;
-        }
-        if (task.selectedTime && task.selectedTime !== 'Select Time') {
-            this.timeSelect.value = task.selectedTime;
-        }
-
-        // Clear the subtask list
-        while (this.subtaskList.firstChild) {
-            this.subtaskList.firstChild.remove();
-        }
-
-        // Add each subtask to the subtask list
-        task.subtasks.forEach(subtask => {
-            this.addSubtaskToDOM(subtask);
-        });
+    if (!taskId) {
+        console.log('No active task ID found in local storage');
+        return;
     }
+
+    // Fetch the task details from the server
+    const task = await this.taskSender.getTaskFromServer(taskId);
+
+    // Populate the task details UI with the fetched data
+    this.taskRename.value = task.name;
+    this.descriptionBox.value = task.description;
+
+    // Wait for the dropdown menus to be populated
+    await this.populateDropdownMenus();
+
+    // Set the value of listSelect and tagsSelect to the values from the task object
+    this.listSelect.value = task.list;
+    this.tagsSelect.value = task.tags;
+
+    // Check if the selectedDueDate and selectedTime are in the correct format before setting the value
+    if (task.selectedDueDate && task.selectedDueDate !== 'Select Due Date') {
+        this.dueDateSelect.value = task.selectedDueDate;
+    }
+    if (task.selectedTime && task.selectedTime !== 'Select Time') {
+        this.timeSelect.value = task.selectedTime;
+    }
+
+    // Clear the subtask list
+    while (this.subtaskList.firstChild) {
+        this.subtaskList.firstChild.remove();
+    }
+
+    // Add each subtask to the subtask list
+    task.subtasks.forEach(subtask => {
+        this.addSubtaskToDOM(subtask);
+    });
+}
 
 }
     

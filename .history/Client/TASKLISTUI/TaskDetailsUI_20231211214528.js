@@ -1,7 +1,6 @@
 import DOMHelper from "../DOMHelper/DOMHelper.js";
 import Subtask from "../Subtask/Subtask.js";
 import TaskSender from "./TaskSender.js";
-import UI from "../UI/UI.js";
 
 
 export default class TaskDetailsUI {
@@ -330,14 +329,12 @@ export default class TaskDetailsUI {
         this.taskRename.value = task.name;
         this.descriptionBox.value = task.description;
 
-        this.ui = new UI()
-
         // Wait for the dropdown menus to be populated
-        await Promise.all([this.ui.populateDropdownMenus()]);
+        await this.populateDropdownMenus();
 
-        // Set the value of listSelect and tagsSelect to the values from the task object
-        this.listSelect.value = task.list;
-        this.tagsSelect.value = task.tags;
+        // Set the value of listSelect and tagsSelect to the first option in the list
+        this.listSelect.selectedIndex = 0;
+        this.tagsSelect.selectedIndex = 0;
 
         // Check if the selectedDueDate and selectedTime are in the correct format before setting the value
         if (task.selectedDueDate && task.selectedDueDate !== 'Select Due Date') {

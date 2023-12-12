@@ -1,7 +1,6 @@
 import DOMHelper from "../DOMHelper/DOMHelper.js";
 import Subtask from "../Subtask/Subtask.js";
 import TaskSender from "./TaskSender.js";
-import UI from "../UI/UI.js";
 
 
 export default class TaskDetailsUI {
@@ -330,8 +329,6 @@ export default class TaskDetailsUI {
         this.taskRename.value = task.name;
         this.descriptionBox.value = task.description;
 
-        this.ui = new UI()
-
         // Wait for the dropdown menus to be populated
         await Promise.all([this.ui.populateDropdownMenus()]);
 
@@ -356,7 +353,7 @@ export default class TaskDetailsUI {
         task.subtasks.forEach(subtask => {
             this.addSubtaskToDOM(subtask);
         });
-    }
+}
 
 }
     

@@ -1,7 +1,6 @@
 import DOMHelper from "../DOMHelper/DOMHelper.js";
 import Subtask from "../Subtask/Subtask.js";
 import TaskSender from "./TaskSender.js";
-import UI from "../UI/UI.js";
 
 
 export default class TaskDetailsUI {
