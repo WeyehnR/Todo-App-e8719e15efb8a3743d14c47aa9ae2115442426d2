@@ -147,6 +147,7 @@ export default class UI {
     }
 
     renderUI() {
+
         // Render the task data
         const tasks = this.taskManager.getTasks();
         tasks.forEach(task => {

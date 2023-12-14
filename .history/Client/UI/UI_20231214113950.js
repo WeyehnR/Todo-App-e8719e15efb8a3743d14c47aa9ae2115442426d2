@@ -96,7 +96,18 @@ export default class UI {
 
         console.log('Updated dropdown menu:', dropdown);
     }
-  
+
+    // Add this method to your UI class
+    bindResetButton() {
+        // Get the reset button element
+        const resetButton = this.domHelper.getElementById('reset-btn');
+
+        // Add a click event listener to the reset button
+        resetButton.addEventListener('click', () => {
+            // Clear local storage
+            localStorage.clear();
+        });
+    }
 
         // Populate dropdown menus
     populateDropdownMenus() {
@@ -147,6 +158,9 @@ export default class UI {
     }
 
     renderUI() {
+        // this.taskManager.renderTasks();
+        this.domHelper.getElementById('today-task-counter').textContent = this.taskCount;
+
         // Render the task data
         const tasks = this.taskManager.getTasks();
         tasks.forEach(task => {
@@ -168,6 +182,7 @@ export default class UI {
         this.hamburger.addEventListener('click', () => {
             this.toggleMenu();
         });
+        // this.bindResetButton();
         this.renderUI();
     }
 }

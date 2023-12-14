@@ -96,7 +96,9 @@ export default class UI {
 
         console.log('Updated dropdown menu:', dropdown);
     }
-  
+
+        });
+    }
 
         // Populate dropdown menus
     populateDropdownMenus() {
@@ -147,6 +149,9 @@ export default class UI {
     }
 
     renderUI() {
+        // this.taskManager.renderTasks();
+        this.domHelper.getElementById('today-task-counter').textContent = this.taskCount;
+
         // Render the task data
         const tasks = this.taskManager.getTasks();
         tasks.forEach(task => {
