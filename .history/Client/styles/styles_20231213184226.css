@@ -1,0 +1,304 @@
+body,html {
+    font-family: 'Lexend Deca';
+    background-color: #fafafa;
+    margin: 0;
+    padding: 0;
+    height: 101%;
+}
+
+
+
+
+
+
+/*
+* RIGHT MENU CARD
+*/
+
+#right-menu-card {
+    position:relative;
+    top: 20px;
+    
+    display: none;
+    background-color: #f4f4f4;
+    width: 448px;
+    height: 852px;
+    border-radius: 16px;
+}
+
+#right-menu-card.expanded {
+    /* position: absolute; */
+    right: 0;
+    /* top: 24px; */
+    /* left: 2065px; */
+    width: 448px;
+    height: 852px;
+    background-color: #bfbcbc;
+    border-radius: 16px;
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* justify-content: center; */
+}
+
+.close-icon {
+    position: absolute;
+    top: 30px;
+    right: 15px;
+    /* other styles */
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.task-title {
+    color: #444444;
+    font-size: 24px;
+    font-family: "Lexend Deca";
+    font-weight: 600;
+    line-height: 32px;
+    position: absolute;
+    width: 300px;
+    top: 10px; /* Adjust as needed */
+    left: 30px; /* Adjust as needed */
+}
+
+.due-date {
+    display: block;
+}
+
+.task-rename {
+	position: absolute;
+    top: 94px;
+	width: 400px;
+	height: 34px;
+	padding: 0px 8px;
+	border: 1px solid #ebebeb;
+	box-sizing: border-box;
+	border-radius: 8px;
+	background-color: rgba(235,235,235,0);
+	color: #7c7c7c;
+	font-size: 16px;
+	font-family: "Lexend Deca";
+	line-height: 24px;
+	outline: none;
+	margin-left: 24px;
+}
+
+
+.description-box {
+    position: absolute;
+    top: 133px;
+    left: 25px;
+    width: 400px;
+    height: 128px;
+    background-color:  rgba(235,235,235,0);
+    /* color: rgb(249, 249, 249); */
+    border-radius: 8px;
+    border: 1px solid #ebebeb;
+    box-sizing: border-box;
+    padding: 10px;
+    resize:none;
+    font-size: 16px;
+    font-family: "Lexend Deca";
+}
+
+.description-box:focus {
+    color: black; /* Add this line */
+}
+
+.description-box::placeholder, .description-box input[type="text"] {
+    background-color: rgba(235,235,235,0);
+    font-size: 16px;
+    font-family: "Lexend Deca";
+    line-height: 24px;
+}
+
+.text {
+    color: #444444;
+    font-size: 14px;
+    font-family: "Lexend Deca";
+    padding: 10px;
+    text-align: left;
+    margin-left: 15px;  
+}
+.task-configuration {
+	margin-top: 272px;
+}
+
+
+.list, .due, .tags, .time {
+	display: flex;
+	justify-content: space-between;
+	width: 48%;
+}
+
+#due-date-select {
+	width: 132px;
+	height: 30px;
+	border: 1px solid #ebebeb;
+    font-family: "Lexend Deca";
+	border-radius: 8px;
+    background-color:  rgba(235,235,235,0);
+	padding: 5px;
+	font-size: 16px;
+}
+
+
+.list select, .due select, #due-date-select, #due-time-select, .tags select, .time select, #add-tag-dropdown {
+	cursor: pointer;
+	top: 297px;
+	left: 1086px;
+	width: 314px;
+	height: 34px;
+	padding: 0px 0px;
+	border: 1px solid #ebebeb;
+	box-sizing: border-box;
+	border-radius: 8px;
+	background-color: rgba(235,235,235,0);
+	color: #444444;
+	font-size: 14px;
+	font-family: "Lexend Deca";
+	line-height: 18px;
+	outline: none;
+	margin-left: 35px;
+}
+
+
+#add-tag-dropdown {
+    z-index: 1; /* add this line */
+}
+
+#subtask-list {
+    list-style-type: none;
+    max-height: 200px;
+    direction:ltr;
+}
+
+#subtask-list li {
+    border-bottom: 1px solid #eee;
+    padding: 8px 0;
+}
+
+
+.Subtask {
+    color: #444444;
+    font-size: 24px;
+    font-family: "Lexend Deca";
+    font-weight: 600;
+    line-height: 32px;
+    margin-left: 20px;
+    
+}
+.add-subtask-container {
+    position: absolute;
+    top: 486px;
+    left: 200px;
+    margin-left: -200px;
+    height: auto; /* Adjust this value as needed */
+    max-height: 310px;
+    overflow-y: auto;
+    overflow: visible; 
+}
+
+#subtask-list {
+    max-height: 200px; /* Adjust this value to fit your needs */
+    overflow-y: auto; /* Show scrollbar when content exceeds max-height */
+    padding-right: 20px;
+}
+
+.input-container {
+    display: flex;
+    align-items: center;
+}
+
+
+#add-subtask-btn {
+    padding: 14px;
+    position: absolute;
+    left: 20px;
+    height: 6%;
+    color: #7c7c7c;
+    background-color:rgba(221,221,221,0);
+    fill: rgba(221,221,221,0);
+    border: none;
+    cursor: pointer;
+    font-size: 50px;
+    display: flex; /* Add this line */
+    justify-content: center; /* Add this line */
+    align-items: center; /* Add this line */
+}
+
+
+.input-container{
+    display: flex;
+    justify-content: center;
+    margin-left: 10px;
+    top: 479px;
+    left: 992px;
+    width: 400px;
+    height: 48px;
+    background-color: rgba(221,221,221,0);
+}
+
+#new-subtask-input::placeholder {
+    color: #7c7c7c;
+    font-size: 20px;
+    font-family: "Lexend Deca";
+    line-height: 24px;
+}
+
+#new-subtask-input{
+    padding-left: 60px;
+    font-size: 20px;
+}
+
+#new-subtask-input {
+    width: 400px;
+    height: 48px;
+    background-color: rgba(221,221,221,0);
+    border-radius: 8px;
+    border: 1px solid #ebebeb;
+    outline: none;
+    margin-left: 12px;
+}
+
+
+
+
+.delete-task-button, .save-changes-button{
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    cursor: pointer;
+    width: 188px;
+    height: 48px;
+    padding: 0px 8px;
+    border: 1px solid #dddddd;
+    box-sizing: border-box;
+    border-radius: 8px;
+    background-color: rgba(221,221,221,0);
+    color: #444444;
+    font-size: 16px;
+    font-family: "Lexend Deca";
+    font-weight: 600;
+    line-height: 24px;
+    outline: none;
+    z-index: 1;
+}
+
+.save-changes-button{
+    margin-left: 220px;
+}
+
+.save-changes-button:hover{
+    background-color: #ffd43b;
+
+}
+
+.delete-task-button:hover {
+    font-weight: bolder;
+    background-color: red;
+    border-radius: 10px;
+    width: 188px;
+    height: 48px;
+}
