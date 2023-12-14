@@ -27,36 +27,11 @@ listManager.init();
 tagManager.init();
 
 
-async function checkTimeAndStrikeThrough() {
-    const tasks = document.querySelectorAll('li[data-task]');
-    for (let task of tasks) {
-        const taskId = task.getAttribute('data-task');
-        const taskData = await taskManager.getTaskFromServer(taskId);
-        if (taskData && taskData.selectedTime) {
-            const selectedTime = new Date(taskData.selectedDueDate + ' ' + taskData.selectedTime);
-            const currentTime = new Date();
-            if (selectedTime < currentTime) {
-                const label = task.querySelector('label');
-                const timeElement = task.querySelector('.selected-time');
-                // console.log(timeElement)
-                if (label) {
-                    label.style.color = 'red';
-                    label.style.textDecoration = 'line-through';
-                }
-                if (timeElement) {
-                    timeElement.style.color = 'red';
-                    label.style.textDecoration = 'line-through';
-                }
-            }
-        }
-    }
-}
 
 // Fetch tasks from the server and render them
 async function init() {
     await taskManager.fetchTasksFromServer();
     taskRenderer.renderTasks();
-    
 
     const tasks = document.querySelectorAll('li[data-task]');
     for (let task of tasks) {
@@ -83,8 +58,6 @@ async function init() {
             dueDateElement.parentNode.insertBefore(timeElement, dueDateElement.nextSibling);
         }
     }
-
-    checkTimeAndStrikeThrough()
 }
 init();
 

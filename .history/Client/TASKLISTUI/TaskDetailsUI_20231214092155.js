@@ -28,7 +28,8 @@ export default class TaskDetailsUI {
         this.tagsSelect = this.domHelper.querySelector('#tags-select');
         this.subtaskList = this.domHelper.querySelector('#subtask-list');
         this.closeButton = this.domHelper.querySelector('.close-icon');
-   
+
+        // ...
 
         // Attach event listeners for task details view
         this.initEventListeners();
@@ -89,6 +90,7 @@ export default class TaskDetailsUI {
                     await this.deleteTask(activeTaskId);
                 } catch (err) {
                     console.error('Failed to delete task:', err);
+                    // Show an error message in the UI...
                 }
             }
         });
@@ -96,77 +98,6 @@ export default class TaskDetailsUI {
         
     }
     
-    async updateTaskWithSubtask(taskId, subtask) {
-        console.log(`Updating task with ID: ${taskId}`);
-        const response = await fetch(`/api/tasks/${taskId}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ subtasks: subtask }),
-        });
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        return await response.json();
-    }
-
-    addSubtaskToDOM(subtask) {
-        const subtaskElement = this.createSubtaskElement(subtask);
-        this.subtaskList.appendChild(subtaskElement);
-    }
-
-    async removeSubtaskFromTask(taskId, subtask) {
-        const task = await this.taskSender.getTaskFromServer(taskId);
-        if (task) {
-            const subtaskIndex = task.subtasks.findIndex(st => st.id === subtask.id);
-            if (subtaskIndex !== -1) {
-                task.subtasks.splice(subtaskIndex, 1);
-                this.taskSender.updateTaskOnServer(task);
-            }
-        }
-    }
-
-    createSubtaskElement(subtask) {
-        const subtaskElement = document.createElement('li');
-        
-        const checkbox = document.createElement('input');
-        checkbox.type = 'checkbox';
-        subtaskElement.appendChild(checkbox);
-        
-        subtaskElement.appendChild(document.createTextNode(subtask.name));
-
-        // Create the delete button
-        const deleteButton = document.createElement('button');
-        deleteButton.textContent = 'X';
-        deleteButton.style.position = 'relative';
-        deleteButton.style.left = '300px';
-        deleteButton.addEventListener('click', async () => {
-            try {
-                const taskId = localStorage.getItem('activeTaskId');
-                await this.removeSubtaskFromTask(taskId, subtask);
-                subtaskElement.remove(); // remove the subtask from the DOM
-            } catch (err) {
-                console.error('Failed to remove subtask:', err);
-                // Show an error message in the UI...
-            }
-        });
-
-        // Append the delete button to the subtask element
-        subtaskElement.appendChild(deleteButton);
-
-        return subtaskElement;
-    }
-
-    closeRightMenu() {
-        this.rightMenuCard.classList.remove('expanded');
-        this.rightMenuCard.style.display = 'none';
-        this.todoContainer.classList.remove('right-expanded');
-        this.todoContainer.style.width = 'calc(100% - 5%)';
-    }
-
     // Delete a task by its ID
     async deleteTask(activeTaskId) {
         // Send a DELETE request to the server
@@ -205,6 +136,43 @@ export default class TaskDetailsUI {
         }
     }
 
+    async updateTaskWithSubtask(taskId, subtask) {
+        console.log(`Updating task with ID: ${taskId}`);
+        const response = await fetch(`/api/tasks/${taskId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ subtasks: subtask }),
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        return await response.json();
+    }
+
+    addSubtaskToDOM(subtask) {
+        const subtaskElement = this.createSubtaskElement(subtask);
+        this.subtaskList.appendChild(subtaskElement);
+    }
+
+    createSubtaskElement(subtask) {
+        const subtaskElement = document.createElement('li');
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        subtaskElement.appendChild(checkbox);
+        subtaskElement.appendChild(document.createTextNode(subtask.name));
+        return subtaskElement;
+    }
+
+    closeRightMenu() {
+        this.rightMenuCard.classList.remove('expanded');
+        this.rightMenuCard.style.display = 'none';
+        this.todoContainer.classList.remove('right-expanded');
+        this.todoContainer.style.width = 'calc(100% - 5%)';
+    }
     
     // Attach event listeners to delete task buttons
     attachDeleteEventListeners() {
@@ -219,6 +187,8 @@ export default class TaskDetailsUI {
         });
         this.checkTaskOverflow();
     }
+
+   
     
     // Attach event listener to save changes button
     attachSaveChangesEventListeners() {
@@ -230,82 +200,176 @@ export default class TaskDetailsUI {
             }
         });
     }
-
-    updateTaskProperty(propertyName, newValue) {
-        const activeTaskId = localStorage.getItem('activeTaskId');
-        const task = this.taskManager.findTaskById(activeTaskId);
-        if (task) {
-            task[propertyName] = newValue;
-        } else {
-            console.error(`Task with id ${activeTaskId} not found`);
-        }
-    }
     
     
-    async updateTaskAndSendToServer(propertyName, newValue) {
-        this.updateTaskProperty(propertyName, newValue);
-
-        const activeTaskId = localStorage.getItem('activeTaskId');
-        const updatedTask = this.taskManager.findTaskById(activeTaskId);
-        if (updatedTask) {
-            this.taskSender.updateTaskOnServer(updatedTask);
-        } else {
-            console.error(`Task with id ${activeTaskId} not found`);
-        }
-    }
-
-    bindEventToElement(element, eventName, callback) {
-        element.addEventListener(eventName, callback.bind(this));
-    }
-
+    
+    // Attach event listeners for task rename input field
     bindTaskRename() {
-        this.bindEventToElement(this.taskRename, 'blur', (event) => {
+        this.taskRename.addEventListener('blur', (event) => {
             const newName = event.target.value;
             const taskTitle = this.domHelper.querySelector('.task-title');
             taskTitle.textContent = 'Task: ' + newName;
+            this.updateTaskProperty('name', newName);
 
             const activeTaskId = localStorage.getItem('activeTaskId');
             const label = document.querySelector(`label[for="task-${activeTaskId}"]`);
             label.textContent = newName;
 
-            this.updateTaskAndSendToServer('name', newName);
+            // Send the updated task to the server
+            const updatedTask = this.taskManager.findTaskById(activeTaskId);
+            if (updatedTask) {
+                this.taskSender.updateTaskOnServer(updatedTask);
+            } else {
+                console.error(`Task with id ${activeTaskId} not found`);
+            }
         });
     }
-
+    // Attach event listeners for description box input field
     bindDescriptionBox() {
-        this.bindEventToElement(this.descriptionBox, 'blur', (event) => {
+        this.descriptionBox.addEventListener('blur', (event) => {
             const description = event.target.value;
-            this.updateTaskAndSendToServer('description', description);
+            this.updateTaskProperty('description', description);
+
+            const activeTaskId = localStorage.getItem('activeTaskId');
+            // Send the updated task to the server
+            const updatedTask = this.taskManager.findTaskById(activeTaskId);
+            if (updatedTask) {
+                this.taskSender.updateTaskOnServer(updatedTask);
+            } else {
+                console.error(`Task with id ${activeTaskId} not found`);
+            }
         });
     }
-
+    
+    // Attach event listeners for list select input field
     bindListSelect() {
-        this.bindEventToElement(this.listSelect, 'change', (event) => {
+        this.listSelect.addEventListener('change', (event) => {
             const selectedList = event.target.value;
-            this.updateTaskAndSendToServer('selectedList', selectedList);
+            this.updateTaskProperty('selectedList', selectedList);
+
+            const activeTaskId = localStorage.getItem('activeTaskId');
+            // Send the updated task to the server
+            const updatedTask = this.taskManager.findTaskById(activeTaskId);
+            if (updatedTask) {
+                this.taskSender.updateTaskOnServer(updatedTask);
+            } else {
+                console.error(`Task with id ${activeTaskId} not found`);
+            }
         });
     }
 
-    bindTagsSelect() {
-        this.bindEventToElement(this.tagsSelect, 'change', (event) => {
-            const selectedTags = event.target.value;
-            this.updateTaskAndSendToServer('selectedTags', selectedTags);
-        });
-    }
+        // Attach event listeners for tags select input field
+        bindTagsSelect() {
+            this.tagsSelect.addEventListener('change', (event) => {
+                const selectedTags = event.target.value;
+                this.updateTaskProperty('selectedTags', selectedTags);
+    
+                const activeTaskId = localStorage.getItem('activeTaskId');
+                // Send the updated task to the server
+                const updatedTask = this.taskManager.findTaskById(activeTaskId);
+                if (updatedTask) {
+                    this.taskSender.updateTaskOnServer(updatedTask);
+                } else {
+                    console.error(`Task with id ${activeTaskId} not found`);
+                }
+            });
+        }
+        
+        // Update a task property in local storage
+        updateTaskProperty(property, value) {
+            const activeTaskId = Number(localStorage.getItem('activeTaskId')); // Convert the taskId to a number
+            const task = this.taskManager.findTaskById(activeTaskId);
+            if (task) {
+                task[property] = value;
+            } else {
+                console.error(`Task with id ${activeTaskId} not found`);
+            }
+        }
 
     bindDueDateSelect() {
-        this.bindEventToElement(this.dueDateSelect, 'change', (event) => {
-            const selectedDueDate = event.target.value;
-            this.updateTaskAndSendToServer('selectedDueDate', selectedDueDate);
+        if (!this.bindDueDateCalled) {
+            this.dueDateSelect.addEventListener('change', async (event) => {
+                const selectedDueDate = event.target.value;
+                this.updateTaskProperty('selectedDueDate', selectedDueDate);
+
+                const activeTaskId = localStorage.getItem('activeTaskId');
+                const updatedTask = this.taskManager.findTaskById(Number(activeTaskId));
+                if (updatedTask) {
+                    await this.taskSender.updateTaskOnServer(updatedTask);
+
+                    const activeTask = document.querySelector(`li[data-task="${activeTaskId}"]`);
+                    if (activeTask) {
+                        const existingDueDateElement = activeTask.querySelector('.due-date');
+                        if (existingDueDateElement) {
+                            activeTask.removeChild(existingDueDateElement);
+                        }
+
+                        const dueDateElement = document.createElement('p');
+                        dueDateElement.className = 'due-date';
+                        dueDateElement.textContent = selectedDueDate;
+
+                        // Insert the due date element after the label
+                        const label = activeTask.querySelector('label');
+                        label.parentNode.insertBefore(dueDateElement, label.nextSibling);
+
+                        // Check if the selected due date has passed and strike through the label if it has
+                        const selectedDueDateTime = new Date(selectedDueDate);
+                        const currentTime = new Date();
+                        if (selectedDueDateTime < currentTime) {
+                            label.style.color = 'red';
+                            dueDateElement.style.color = 'red';
+                            label.style.textDecoration = 'line-through';
+                        }
+                    }
+                } else {
+                    console.error(`Task with id ${activeTaskId} not found`);
+                }
+                this.bindDueDateCalled = true;
+            });
+        }
+    }
+    bindTimeSelect() {
+        this.timeSelect.addEventListener('change', async (event) => {
+            const selectedTime = event.target.value;
+            this.updateTaskProperty('selectedTime', selectedTime);
+
+            const activeTaskId = localStorage.getItem('activeTaskId');
+            const updatedTask = this.taskManager.findTaskById(activeTaskId);
+            if (updatedTask) {
+                await this.taskSender.updateTaskOnServer(updatedTask);
+
+                const taskElement = document.querySelector(`li[data-task="${activeTaskId}"]`);
+                if (taskElement) {
+                    const timeElement = taskElement.querySelector('.selected-time');
+                    if (timeElement) {
+                        timeElement.textContent = selectedTime;
+                    } else {
+                        const newTimeElement = document.createElement('p');
+                        newTimeElement.className = 'selected-time';
+                        newTimeElement.textContent = selectedTime;
+                        taskElement.appendChild(newTimeElement);
+                    }
+
+                    // Check if the selected time has passed and strike through the label if it has
+                    const selectedDateTime = new Date(updatedTask.selectedDueDate + ' ' + selectedTime);
+                    const currentTime = new Date();
+                    if (selectedDateTime < currentTime) {
+                        const label = taskElement.querySelector('label');
+                        if (label) {
+                            label.style.color = 'red';
+                            label.style.textDecoration = 'line-through';
+                        }
+                        if (timeElement) {
+                            timeElement.style.color = 'red';
+                        }
+                    }
+                }
+            } else {
+                console.error(`Task with id ${activeTaskId} not found`);
+            }
         });
     }
 
-    bindTimeSelect() {
-        this.bindEventToElement(this.timeSelect, 'change', (event) => {
-            const selectedTime = event.target.value;
-            this.updateTaskAndSendToServer('selectedTime', selectedTime);
-        });
-    }
 
     
     async loadTaskDetailsFromServer() {

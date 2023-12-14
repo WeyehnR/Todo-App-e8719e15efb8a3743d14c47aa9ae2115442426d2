@@ -96,77 +96,6 @@ export default class TaskDetailsUI {
         
     }
     
-    async updateTaskWithSubtask(taskId, subtask) {
-        console.log(`Updating task with ID: ${taskId}`);
-        const response = await fetch(`/api/tasks/${taskId}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ subtasks: subtask }),
-        });
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        return await response.json();
-    }
-
-    addSubtaskToDOM(subtask) {
-        const subtaskElement = this.createSubtaskElement(subtask);
-        this.subtaskList.appendChild(subtaskElement);
-    }
-
-    async removeSubtaskFromTask(taskId, subtask) {
-        const task = await this.taskSender.getTaskFromServer(taskId);
-        if (task) {
-            const subtaskIndex = task.subtasks.findIndex(st => st.id === subtask.id);
-            if (subtaskIndex !== -1) {
-                task.subtasks.splice(subtaskIndex, 1);
-                this.taskSender.updateTaskOnServer(task);
-            }
-        }
-    }
-
-    createSubtaskElement(subtask) {
-        const subtaskElement = document.createElement('li');
-        
-        const checkbox = document.createElement('input');
-        checkbox.type = 'checkbox';
-        subtaskElement.appendChild(checkbox);
-        
-        subtaskElement.appendChild(document.createTextNode(subtask.name));
-
-        // Create the delete button
-        const deleteButton = document.createElement('button');
-        deleteButton.textContent = 'X';
-        deleteButton.style.position = 'relative';
-        deleteButton.style.left = '300px';
-        deleteButton.addEventListener('click', async () => {
-            try {
-                const taskId = localStorage.getItem('activeTaskId');
-                await this.removeSubtaskFromTask(taskId, subtask);
-                subtaskElement.remove(); // remove the subtask from the DOM
-            } catch (err) {
-                console.error('Failed to remove subtask:', err);
-                // Show an error message in the UI...
-            }
-        });
-
-        // Append the delete button to the subtask element
-        subtaskElement.appendChild(deleteButton);
-
-        return subtaskElement;
-    }
-
-    closeRightMenu() {
-        this.rightMenuCard.classList.remove('expanded');
-        this.rightMenuCard.style.display = 'none';
-        this.todoContainer.classList.remove('right-expanded');
-        this.todoContainer.style.width = 'calc(100% - 5%)';
-    }
-
     // Delete a task by its ID
     async deleteTask(activeTaskId) {
         // Send a DELETE request to the server
@@ -205,6 +134,73 @@ export default class TaskDetailsUI {
         }
     }
 
+    async updateTaskWithSubtask(taskId, subtask) {
+        console.log(`Updating task with ID: ${taskId}`);
+        const response = await fetch(`/api/tasks/${taskId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ subtasks: subtask }),
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        return await response.json();
+    }
+
+    addSubtaskToDOM(subtask) {
+        const subtaskElement = document.createElement('li');
+        subtaskElement.textContent = subtask.name;
+
+        // Create the delete button
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'X';
+        deleteButton.addEventListener('click', async () => {
+            try {
+                const taskId = localStorage.getItem('activeTaskId');
+                await this.removeSubtaskFromTask(taskId, subtask);
+                subtaskElement.remove(); // remove the subtask from the DOM
+            } catch (err) {
+                console.error('Failed to remove subtask:', err);
+                // Show an error message in the UI...
+            }
+        });
+
+        // Append the delete button to the subtask element
+        subtaskElement.appendChild(deleteButton);
+
+        this.subtaskList.appendChild(subtaskElement);
+    }
+
+    async removeSubtaskFromTask(taskId, subtask) {
+        const task = await this.taskSender.getTaskFromServer(taskId);
+        if (task) {
+            const subtaskIndex = task.subtasks.findIndex(st => st.id === subtask.id);
+            if (subtaskIndex !== -1) {
+                task.subtasks.splice(subtaskIndex, 1);
+                this.taskSender.updateTaskOnServer(task);
+            }
+        }
+    }
+
+    createSubtaskElement(subtask) {
+        const subtaskElement = document.createElement('li');
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        subtaskElement.appendChild(checkbox);
+        subtaskElement.appendChild(document.createTextNode(subtask.name));
+        return subtaskElement;
+    }
+
+    closeRightMenu() {
+        this.rightMenuCard.classList.remove('expanded');
+        this.rightMenuCard.style.display = 'none';
+        this.todoContainer.classList.remove('right-expanded');
+        this.todoContainer.style.width = 'calc(100% - 5%)';
+    }
     
     // Attach event listeners to delete task buttons
     attachDeleteEventListeners() {

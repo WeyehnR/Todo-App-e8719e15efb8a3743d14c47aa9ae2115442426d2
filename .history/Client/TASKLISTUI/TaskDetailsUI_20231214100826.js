@@ -96,6 +96,7 @@ export default class TaskDetailsUI {
         
     }
     
+    
     async updateTaskWithSubtask(taskId, subtask) {
         console.log(`Updating task with ID: ${taskId}`);
         const response = await fetch(`/api/tasks/${taskId}`, {
@@ -114,8 +115,9 @@ export default class TaskDetailsUI {
     }
 
     addSubtaskToDOM(subtask) {
-        const subtaskElement = this.createSubtaskElement(subtask);
-        this.subtaskList.appendChild(subtaskElement);
+        const subtaskElement = document.createElement('li');
+        subtaskElement.textContent = subtask.name;
+        this.createSubtaskElement(subtask);
     }
 
     async removeSubtaskFromTask(taskId, subtask) {
@@ -141,8 +143,6 @@ export default class TaskDetailsUI {
         // Create the delete button
         const deleteButton = document.createElement('button');
         deleteButton.textContent = 'X';
-        deleteButton.style.position = 'relative';
-        deleteButton.style.left = '300px';
         deleteButton.addEventListener('click', async () => {
             try {
                 const taskId = localStorage.getItem('activeTaskId');
@@ -166,45 +166,6 @@ export default class TaskDetailsUI {
         this.todoContainer.classList.remove('right-expanded');
         this.todoContainer.style.width = 'calc(100% - 5%)';
     }
-
-    // Delete a task by its ID
-    async deleteTask(activeTaskId) {
-        // Send a DELETE request to the server
-        const response = await fetch(`/api/tasks/${activeTaskId}`, {
-            method: 'DELETE',
-        });
-
-        if (!response.ok) {
-            if (response.status === 404) {
-                // If the server returns a 404 status, assume the task has already been deleted
-                console.log(`Task ${activeTaskId} has already been deleted`);
-            } else {
-                // If the server returns any other error status, throw an error
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-        }
-
-        // Update the task data
-        this.taskManager.deleteTask(activeTaskId);
-
-        // Update the UI
-        const activeTaskElement = this.domHelper.querySelector(`[data-task="${activeTaskId}"]`);
-        if (activeTaskElement) {
-            activeTaskElement.remove();
-        }
-
-        // Update the active task
-        localStorage.removeItem('activeTaskId');
-        if (this.taskManager.getTasks().length === 0) {
-            this.closeRightMenu();
-        } else {
-            // If there are remaining tasks, set the activeTaskId to the ID of the first task
-            const remainingTasks = this.taskManager.getTasks();
-            const newActiveTaskId = remainingTasks[0].id;
-            localStorage.setItem('activeTaskId', newActiveTaskId);
-        }
-    }
-
     
     // Attach event listeners to delete task buttons
     attachDeleteEventListeners() {

@@ -141,8 +141,6 @@ export default class TaskDetailsUI {
         // Create the delete button
         const deleteButton = document.createElement('button');
         deleteButton.textContent = 'X';
-        deleteButton.style.position = 'relative';
-        deleteButton.style.left = '300px';
         deleteButton.addEventListener('click', async () => {
             try {
                 const taskId = localStorage.getItem('activeTaskId');

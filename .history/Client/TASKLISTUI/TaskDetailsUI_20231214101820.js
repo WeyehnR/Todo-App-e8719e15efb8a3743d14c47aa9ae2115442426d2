@@ -139,20 +139,20 @@ export default class TaskDetailsUI {
         subtaskElement.appendChild(document.createTextNode(subtask.name));
 
         // Create the delete button
-        const deleteButton = document.createElement('button');
-        deleteButton.textContent = 'X';
-        deleteButton.style.position = 'relative';
-        deleteButton.style.left = '300px';
-        deleteButton.addEventListener('click', async () => {
-            try {
-                const taskId = localStorage.getItem('activeTaskId');
-                await this.removeSubtaskFromTask(taskId, subtask);
-                subtaskElement.remove(); // remove the subtask from the DOM
-            } catch (err) {
-                console.error('Failed to remove subtask:', err);
-                // Show an error message in the UI...
-            }
-        });
+const deleteButton = document.createElement('button');
+deleteButton.textContent = 'X';
+deleteButton.style.position = 'relative';
+deleteButton.style.left = '300px';
+deleteButton.addEventListener('click', async () => {
+    try {
+        const taskId = localStorage.getItem('activeTaskId');
+        await this.removeSubtaskFromTask(taskId, subtask);
+        subtaskElement.remove(); // remove the subtask from the DOM
+    } catch (err) {
+        console.error('Failed to remove subtask:', err);
+        // Show an error message in the UI...
+    }
+});
 
         // Append the delete button to the subtask element
         subtaskElement.appendChild(deleteButton);

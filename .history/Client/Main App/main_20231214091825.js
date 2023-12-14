@@ -38,7 +38,7 @@ async function checkTimeAndStrikeThrough() {
             if (selectedTime < currentTime) {
                 const label = task.querySelector('label');
                 const timeElement = task.querySelector('.selected-time');
-                // console.log(timeElement)
+                console.log(timeElement)
                 if (label) {
                     label.style.color = 'red';
                     label.style.textDecoration = 'line-through';
@@ -56,7 +56,7 @@ async function checkTimeAndStrikeThrough() {
 async function init() {
     await taskManager.fetchTasksFromServer();
     taskRenderer.renderTasks();
-    
+    checkTimeAndStrikeThrough()
 
     const tasks = document.querySelectorAll('li[data-task]');
     for (let task of tasks) {
@@ -83,8 +83,6 @@ async function init() {
             dueDateElement.parentNode.insertBefore(timeElement, dueDateElement.nextSibling);
         }
     }
-
-    checkTimeAndStrikeThrough()
 }
 init();
 
