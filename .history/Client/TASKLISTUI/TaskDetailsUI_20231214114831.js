@@ -234,7 +234,7 @@ export default class TaskDetailsUI {
     updateTaskProperty(propertyName, newValue) {
         const activeTaskId = localStorage.getItem('activeTaskId');
         const task = this.taskManager.findTaskById(activeTaskId);
-        console.log(task);
+        console.l
         if (task) {
             task[propertyName] = newValue;
         } else {
